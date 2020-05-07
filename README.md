@@ -138,9 +138,7 @@ https://trello.com/b/LN9YSuKF/o-sole-mio
 
 ### Git
 
-The url to your repository and to your deployed project
-
-[Repository Link](http://github.com/)
+https://github.com/duducarmona/o-sole-mio-client
 
 [Deploy Link](http://heroku.com/)
 
