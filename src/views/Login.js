@@ -11,6 +11,7 @@ class Login extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     const { onLogin } = this.props;
+
     if (username !== "" && password !== "") {
       onLogin({ username, password });
     }
