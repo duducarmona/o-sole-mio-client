@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch } from "react-router-dom";
 
 import AnonRoute from "./components/AnonRoute";
-import PrivateRoute from "./components/PriveteRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Protected from "./views/Protected";
 import LoginWithAuth from "./views/Login";
