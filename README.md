@@ -101,17 +101,17 @@ Terrace model
 	address: { type: String, required: true },
 	phone: String,
   email: String,
-  pictures: [String],
+  picture: String,
   freeTables: Number,
   beerPrice: Number,
   bestTapa: String,
 	type: { type: String, enum: ['bar', 'restaurant'] },
   liveMusic: Boolean,
   petFriendly: Boolean,
-  menuPictures: [String],
+  menuPicture: String,
   sunAmount: { type: String, enum: ['totallySunny', 'partlySunny', 'notSunny'] },
   sunRegisterTime: Date,
-  starsNumber: Number
+  //starsNumber: Number
 }
 ```
 
