@@ -103,8 +103,10 @@ class AuthProvider extends Component {
 
   render() {
     const { children } = this.props;
-    const { isLoggedIn, user } = this.state;
+    const { isLoggedIn, user, isLoading } = this.state;
+    
     return (
+      isLoading ? (<div>Loading...</div>) : 
       <AuthContext.Provider
         value={{
           isLoggedIn,

@@ -8,7 +8,7 @@ class Resorts extends Component {
     return (
       <div>
         <h1>Protected</h1>
-        <button onClick={onLogout}>Loogut</button>
+        <button onClick={onLogout}>Logout</button>
       </div>
     );
   }
