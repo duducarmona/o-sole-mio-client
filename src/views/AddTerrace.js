@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import apiClient from "../services/apiClient";
-import { withAuth } from "../context/authContext";
+import React, { Component } from 'react';
+import apiClient from '../services/apiClient';
+import { withAuth } from '../context/authContext';
 
 class AddTerrace extends Component {
   state = {
@@ -23,7 +23,7 @@ class AddTerrace extends Component {
     apiClient
       .createTerrace({ name, userId, description })
       .then((res) => {
-        history.push("/protected");
+        history.push('/terraces');
       })
       .catch((error) => {
         console.log(error);
@@ -35,17 +35,17 @@ class AddTerrace extends Component {
       <div>
         <h1>Add Terrace</h1>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor='name'>Name</label>
           <input
-            type="text"
-            name="name"
-            id="name"
+            type='text'
+            name='name'
+            id='name'
             onChange={this.handleChange}
           />
-          <label htmlFor="description">Description</label>
+          <label htmlFor='description'>Description</label>
           <textarea
-            name="description"
-            id="description"
+            name='description'
+            id='description'
             onChange={this.handleChange}
           />
           {/* <label htmlFor="longitude">Lon</label>
@@ -55,7 +55,7 @@ class AddTerrace extends Component {
             id="longitude"
             onChange={this.handleChange}
           /> */}
-          <input type="submit" value="submit" />
+          <input type='submit' value='submit' />
         </form>
       </div>
     );

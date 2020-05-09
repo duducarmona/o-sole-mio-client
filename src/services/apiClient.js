@@ -9,27 +9,31 @@ class ApiClient {
   }
 
   login(body) {
-    return this.apiClient.post("/login", body);
+    return this.apiClient.post('/login', body);
   }
 
   signup(body) {
-    return this.apiClient.post("/signup", body);
+    return this.apiClient.post('/signup', body);
   }
 
   logout() {
-    return this.apiClient.get("/logout");
+    return this.apiClient.get('/logout');
   }
 
   whoami() {
-    return this.apiClient.get("/whoami");
+    return this.apiClient.get('/whoami');
   }
 
   getProtected() {
-    return this.apiClient.get("/protected");
+    return this.apiClient.get('/protected');
   }
 
   createTerrace(body) {
-    return this.apiClient.post("/terraces", body);
+    return this.apiClient.post('/terraces', body);
+  }
+
+  getAllTerraces() {
+    return this.apiClient.get('/terraces');
   }
 }
 
