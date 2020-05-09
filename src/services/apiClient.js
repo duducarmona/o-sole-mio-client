@@ -27,6 +27,10 @@ class ApiClient {
   getProtected() {
     return this.apiClient.get("/protected");
   }
+
+  createTerrace(body) {
+    return this.apiClient.post("/terraces", body);
+  }
 }
 
 const apiClient = new ApiClient();

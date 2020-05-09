@@ -4,6 +4,7 @@ import { withAuth } from "../context/authContext";
 
 class Resorts extends Component {
   render() {
+    // console.log('this.props: ', this.props);
     const { onLogout } = this.props;
     return (
       <div>
