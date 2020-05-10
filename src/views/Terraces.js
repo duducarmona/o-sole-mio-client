@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import apiClient from '../services/apiClient';
+import { Link } from 'react-router-dom';
 
 class Terraces extends Component {
   state = {
@@ -41,7 +42,9 @@ class Terraces extends Component {
     return terraces.map((terrace, index) => {
       return (
         <li key={index}>
-          {terrace.name}
+          <Link to={`/terraces/${terrace._id}`}>
+            {terrace.name}
+          </Link>
           <button
             onClick={(e) => {
               this.handleDelete(terrace._id);

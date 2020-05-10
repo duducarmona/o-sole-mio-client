@@ -39,6 +39,10 @@ class ApiClient {
   deleteTerrace(id) {
     return this.apiClient.delete(`/terraces/${id}`);
   }
+
+  getTerraceDetail(id) {
+    return this.apiClient.get(`/terraces/${id}`);
+  }
 }
 
 const apiClient = new ApiClient();
