@@ -37,6 +37,7 @@ class Terraces extends Component {
 
   renderTerraces = () => {
     const { terraces } = this.state;
+
     return terraces.map((terrace, index) => {
       return (
         <li key={index}>
