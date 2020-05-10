@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import apiClient from '../services/apiClient';
-import { withAuth } from '../context/authContext';
+import apiClient from '../../services/apiClient';
+import { withAuth } from '../../context/authContext';
 import './AddTerrace.css';
 
 class AddTerrace extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { withAuth } from "../context/authContext";
+import { withAuth } from "../../context/authContext";
 
 class Resorts extends Component {
   render() {

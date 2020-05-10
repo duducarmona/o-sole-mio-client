@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiClient from '../services/apiClient';
+import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
 
 class Terraces extends Component {

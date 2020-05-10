@@ -4,13 +4,13 @@ import { Switch } from 'react-router-dom';
 import AnonRoute from './components/AnonRoute';
 import PrivateRoute from './components/PrivateRoute';
 
-import Protected from './views/Protected';
-import LoginWithAuth from './views/Login';
-import SignupWithAuth from './views/Signup';
-import AddTerraceWithAuth from './views/AddTerrace';
-import Terraces from './views/Terraces';
-import TerraceDetail from './views/TerraceDetail';
-import EditTerrace from './views/EditTerrace';
+import Protected from './views/auth/Protected';
+import LoginWithAuth from './views/auth/Login';
+import SignupWithAuth from './views/auth/Signup';
+import AddTerraceWithAuth from './views/terraces/AddTerrace';
+import Terraces from './views/terraces/Terraces';
+import TerraceDetail from './views/terraces/TerraceDetail';
+import EditTerrace from './views/terraces/EditTerrace';
 
 import AuthProvider from './context/authContext';
 
