@@ -11,7 +11,6 @@ import AddTerraceWithAuth from './views/terraces/AddTerrace';
 import Terraces from './views/terraces/Terraces';
 import TerraceDetail from './views/terraces/TerraceDetail';
 import EditTerrace from './views/terraces/EditTerrace';
-import Navbar from './views/navbar/Navbar';
 
 import AuthProvider from './context/authContext';
 
@@ -21,9 +20,8 @@ class App extends Component {
       <AuthProvider>
         <div>
           <div className='App'>
-            <Navbar />
             <Switch>
-              <AnonRoute exact path={'/login'} component={LoginWithAuth} />
+              <AnonRoute exact path={'/'} component={LoginWithAuth} />
               <AnonRoute exact path={'/signup'} component={SignupWithAuth} />
               <PrivateRoute exact path={'/protected'} component={Protected} />
               <PrivateRoute exact path={'/terraces/add'} component={AddTerraceWithAuth} />

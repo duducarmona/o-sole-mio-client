@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-
+import Navbar from '../views/navbar/Navbar';
 import { withAuth } from "../context/authContext";
 
 function PrivateRoute({ component: Comp, isLoggedIn, ...rest }) {
@@ -9,11 +9,14 @@ function PrivateRoute({ component: Comp, isLoggedIn, ...rest }) {
       {...rest}
       render={(props) =>
         isLoggedIn ? (
-          <Comp {...props} />
+          <div>
+            <Navbar />
+            <Comp {...props} />
+          </div>
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: '/',
               state: { from: props.location },
             }}
           />

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withAuth } from "../../context/authContext";
+import './Login.css';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   state = {
@@ -34,14 +36,15 @@ class Login extends Component {
     const { username, password } = this.state;
 
     return (
-      <div>
-        <h1>Login</h1>
+      <div className='Login'>
+        <img className='Login-logo' src='images/sun.png' alt='sun logo' />
+        <h1>O Sole Mio</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="username"
             id="username"
-            placeholder="username"
+            placeholder="Username"
             value={username}
             onChange={this.handleChange}
           />
@@ -49,12 +52,13 @@ class Login extends Component {
             type="password"
             name="password"
             id="password"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             onChange={this.handleChange}
           />
-          <input type="submit" value="submit" />
+          <input type="submit" value="LOGIN" />
         </form>
+        <p>Don't have an account? <Link className='Login-Link' to={'/signup'}>Register here</Link></p>
       </div>
     );
   }
