@@ -1,13 +1,72 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import apiClient from '../services/apiClient';
-import { withAuth } from '../context/authContext';
-import './AddTerrace.css';
 
-class AddTerrace extends Component {
+class EditTerrace extends Component {
   state = {
     name: '',
-    userId: this.props.user.data._id,
-    description: ''
+    description: '',
+    address: '',
+    phone: '',
+    email: '',
+    picture: '',
+    beerPrice: '',
+    bestTapa: '',
+    type: '',
+    liveMusic: false,
+    petFriendly: false,
+    menuPicture: '',
+    sunAmount: '',
+    sunRegisterTime: '' 
+  }
+
+  componentDidMount() {
+    this.getTerraceDetail();
+  }
+
+  getTerraceDetail = () => {
+    const { params } = this.props.match;
+    
+    apiClient
+      .getTerraceDetail(params.id)
+      .then((responseFromApi) => {
+        const terrace = responseFromApi.data;
+        const { 
+          name, 
+          description,
+          address,
+          phone,
+          email,
+          picture,
+          beerPrice,
+          bestTapa,
+          type,
+          liveMusic,
+          petFriendly,
+          menuPicture,
+          sunAmount,
+          sunRegisterTime
+        } = terrace;
+        
+        this.setState({
+          name,
+          description,
+          address,
+          phone,
+          email,
+          picture,
+          beerPrice,
+          bestTapa,
+          type,
+          liveMusic,
+          petFriendly,
+          menuPicture,
+          sunAmount,
+          sunRegisterTime
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   handleChange = (e) => {
@@ -19,9 +78,10 @@ class AddTerrace extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { history } = this.props;
+    const { id } = this.props.match.params;
+    
     const { 
       name, 
-      userId, 
       description,
       address,
       phone,
@@ -34,13 +94,12 @@ class AddTerrace extends Component {
       petFriendly,
       menuPicture,
       sunAmount,
-      sunRegisterTime 
+      // sunRegisterTime 
     } = this.state;
-    
+
     apiClient
-      .createTerrace({ 
+      .editTerrace(id, { 
         name, 
-        userId, 
         description,
         address,
         phone,
@@ -53,10 +112,10 @@ class AddTerrace extends Component {
         petFriendly,
         menuPicture,
         sunAmount,
-        sunRegisterTime 
+        // sunRegisterTime 
       })
       .then((res) => {
-        history.push('/terraces');
+        history.push(`/terraces/${id}`);
       })
       .catch((error) => {
         console.log(error);
@@ -64,9 +123,26 @@ class AddTerrace extends Component {
   };
 
   render() {
+    const { 
+      name,
+      description,
+      address,
+      phone,
+      email,
+      picture,
+      beerPrice,
+      bestTapa,
+      type,
+      liveMusic,
+      petFriendly,
+      menuPicture,
+      sunAmount,
+      sunRegisterTime
+    } = this.state;
+    
     return (
-      <div className='AddTerrace'>
-        <h1>New Terrace</h1>
+      <div>
+        <h1>Edit Terrace</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
           <input
@@ -74,12 +150,14 @@ class AddTerrace extends Component {
             name='name'
             id='name'
             onChange={this.handleChange}
+            value={name}
           />
           <label htmlFor='description'>Description</label>
           <textarea
             name='description'
             id='description'
             onChange={this.handleChange}
+            value={description}
           />
           <label htmlFor='address'>Address*</label>
           <input
@@ -87,6 +165,7 @@ class AddTerrace extends Component {
             name='address'
             id='address'
             onChange={this.handleChange}
+            value={address}
           />
           <label htmlFor='phone'>Phone</label>
           <input
@@ -94,6 +173,7 @@ class AddTerrace extends Component {
             name='phone'
             id='phone'
             onChange={this.handleChange}
+            value={phone}
           />
           <label htmlFor='email'>Email</label>
           <input
@@ -101,6 +181,7 @@ class AddTerrace extends Component {
             name='email'
             id='email'
             onChange={this.handleChange}
+            value={email}
           />
           <label htmlFor='picture'>Picture</label>
           <input
@@ -108,6 +189,7 @@ class AddTerrace extends Component {
             name='picture'
             id='picture'
             onChange={this.handleChange}
+            value={picture}
           />
           <label htmlFor='beerPrice'>Beer price</label>
           <input
@@ -115,6 +197,7 @@ class AddTerrace extends Component {
             name='beerPrice'
             id='beerPrice'
             onChange={this.handleChange}
+            value={beerPrice}
           />
           <label htmlFor='bestTapa'>Best tapa</label>
           <input
@@ -122,10 +205,10 @@ class AddTerrace extends Component {
             name='bestTapa'
             id='bestTapa'
             onChange={this.handleChange}
+            value={bestTapa}
           />
           <label htmlFor='type'>Type</label>
           <select name='type' id='type' onChange={this.handleChange}>
-            {/* <option value="">--Please choose an option--</option> */}
             <option value='bar'>Bar</option>
             <option value='restaurant'>Restaurant</option>
           </select>
@@ -157,6 +240,7 @@ class AddTerrace extends Component {
             name='menuPicture'
             id='menuPicture'
             onChange={this.handleChange}
+            value={menuPicture}
           />
           <label htmlFor='sunAmount'>Sun amount</label>
           <select name='sunAmount' id='sunAmount' onChange={this.handleChange}>
@@ -172,4 +256,4 @@ class AddTerrace extends Component {
   }
 }
 
-export default withAuth(AddTerrace);
+export default EditTerrace;

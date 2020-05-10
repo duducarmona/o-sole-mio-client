@@ -43,6 +43,10 @@ class ApiClient {
   getTerraceDetail(id) {
     return this.apiClient.get(`/terraces/${id}`);
   }
+
+  editTerrace(id, body) {
+    return this.apiClient.put(`/terraces/${id}`, body);
+  }
 }
 
 const apiClient = new ApiClient();

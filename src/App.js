@@ -10,6 +10,7 @@ import SignupWithAuth from './views/Signup';
 import AddTerraceWithAuth from './views/AddTerrace';
 import Terraces from './views/Terraces';
 import TerraceDetail from './views/TerraceDetail';
+import EditTerrace from './views/EditTerrace';
 
 import AuthProvider from './context/authContext';
 
@@ -26,6 +27,7 @@ class App extends Component {
               <PrivateRoute exact path={'/terraces/add'} component={AddTerraceWithAuth} />
               <PrivateRoute exact path={'/terraces'} component={Terraces} />
               <PrivateRoute exact path={'/terraces/:id'} component={TerraceDetail} />
+              <PrivateRoute exact path={'/terraces/:id/edit'} component={EditTerrace} />
             </Switch>
           </div>
         </div>
