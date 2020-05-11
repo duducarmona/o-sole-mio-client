@@ -1,0 +1,16 @@
+.Terraces img {
+    width: 300px;
+}
+
+.Terraces ul {
+    padding-left: 40px;
+}
+
+.Terraces li {
+    list-style: none;
+}
+
+.Terraces-Link {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
+import './Terraces.css';
 
 class Terraces extends Component {
   state = {
@@ -42,7 +43,8 @@ class Terraces extends Component {
     return terraces.map((terrace, index) => {
       return (
         <li key={index}>
-          <Link to={`/terraces/${terrace._id}`}>
+          <Link className='Terraces-Link' to={`/terraces/${terrace._id}`}>
+            <img src={terrace.picture} alt={terrace.name} />
             {terrace.name}
           </Link>
           <button
@@ -59,8 +61,8 @@ class Terraces extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Terraces</h1>
+      <div className='Terraces'>
+        {/* <h1>Terraces</h1> */}
         <ul>{this.renderTerraces()}</ul>
       </div>
     );
