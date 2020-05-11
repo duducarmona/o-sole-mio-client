@@ -41,7 +41,8 @@ class TerraceDetail extends Component {
       type,
       liveMusic,
       petFriendly,
-      menu
+      menuPicture,
+      sunAmount
     } = this.state.terrace;
     
     return (
@@ -49,6 +50,9 @@ class TerraceDetail extends Component {
         <img src={picture} alt={name} />
         <h1>{name}</h1>
         <p>{description}</p>
+        {sunAmount === 'totallySunny' && <p>Totally sunny</p>}
+        {sunAmount === 'partlySunny' && <p>Partly sunny</p>}
+        {sunAmount === 'notSunny' && <p>Not sunny</p>}
         <p>{address}</p>
         <p>Phone: {phone}</p>
         <p>Email: {email}</p>
@@ -58,7 +62,7 @@ class TerraceDetail extends Component {
         {liveMusic ? <p>Live music: Yes</p> : <p>Live music: No</p>}
         {petFriendly ? <p>Pet friendly: Yes</p> : <p>Pet friendly: No</p>}
         <h3>Menu:</h3>
-        <img src={menu} alt='Menu' />
+        <img src={menuPicture} alt='Menu' />
         <Link to={`/terraces/${_id}/edit`}>Edit Terrace</Link>
       </div>
     );

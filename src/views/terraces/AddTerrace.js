@@ -6,12 +6,29 @@ import './AddTerrace.css';
 class AddTerrace extends Component {
   state = {
     userId: this.props.user.data._id,
-    type: 'bar'
+    type: 'bar',
+    liveMusic: false,
+    petFriendly: false,
+    name: '',
+    description: '',
+    address: '',
+    phone: '',
+    email: '',
+    picture: '',
+    beerPrice: '',
+    bestTapa: '',
+    menuPicture: '',
+    sunAmount: '',
+    sunRegisterTime: ''
   };
 
   handleChange = (e) => {
+    const target = e.target;
+    const value = (target.name === 'liveMusic' || target.name === 'petFriendly') ? target.checked : target.value;
+    const name = target.name;
+
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: value
     });
   };
 
@@ -63,6 +80,23 @@ class AddTerrace extends Component {
   };
 
   render() {
+    const { 
+      name,
+      description,
+      address,
+      phone,
+      email,
+      picture,
+      beerPrice,
+      bestTapa,
+      type,
+      liveMusic,
+      petFriendly,
+      menuPicture,
+      sunAmount,
+      sunRegisterTime
+    } = this.state;
+
     return (
       <div className='AddTerrace'>
         <h1>New Terrace</h1>
@@ -73,12 +107,14 @@ class AddTerrace extends Component {
             name='name'
             id='name'
             onChange={this.handleChange}
+            value={name}
           />
           <label htmlFor='description'>Description</label>
           <textarea
             name='description'
             id='description'
             onChange={this.handleChange}
+            value={description}
           />
           <label htmlFor='address'>Address*</label>
           <input
@@ -86,6 +122,7 @@ class AddTerrace extends Component {
             name='address'
             id='address'
             onChange={this.handleChange}
+            value={address}
           />
           <label htmlFor='phone'>Phone</label>
           <input
@@ -93,6 +130,7 @@ class AddTerrace extends Component {
             name='phone'
             id='phone'
             onChange={this.handleChange}
+            value={phone}
           />
           <label htmlFor='email'>Email</label>
           <input
@@ -100,6 +138,7 @@ class AddTerrace extends Component {
             name='email'
             id='email'
             onChange={this.handleChange}
+            value={email}
           />
           <label htmlFor='picture'>Picture</label>
           <input
@@ -107,6 +146,7 @@ class AddTerrace extends Component {
             name='picture'
             id='picture'
             onChange={this.handleChange}
+            value={picture}
           />
           <label htmlFor='beerPrice'>Beer price</label>
           <input
@@ -114,6 +154,7 @@ class AddTerrace extends Component {
             name='beerPrice'
             id='beerPrice'
             onChange={this.handleChange}
+            value={beerPrice}
           />
           <label htmlFor='bestTapa'>Best tapa</label>
           <input
@@ -121,31 +162,32 @@ class AddTerrace extends Component {
             name='bestTapa'
             id='bestTapa'
             onChange={this.handleChange}
+            value={bestTapa}
           />
           <label htmlFor='type'>Type</label>
-          <select name='type' id='type' onChange={this.handleChange}>
+          <select name='type' id='type' onChange={this.handleChange} value={type}>
             <option value='bar'>Bar</option>
             <option value='restaurant'>Restaurant</option>
           </select>
           <div className='AddTerrace-checkboxes'>
             <div className='AddTerrace-checkbox'>
-              <label htmlFor='liveMusic' className='AddTerrace-label-checkbox'>Live music</label>
-              <input className='AddTerrace-label-checkbox'
+              <label htmlFor='liveMusic'>Live music</label>
+              <input
                 type='checkbox'
                 name='liveMusic'
                 id='liveMusic'
                 onChange={this.handleChange}
-                value='true'
+                checked={liveMusic}
               />
             </div>
             <div className='AddTerrace-checkbox'>
-              <label htmlFor='petFriendly' className='AddTerrace-label-checkbox'>Pet friendly</label>
-              <input  className='AddTerrace-label-checkbox'
+              <label htmlFor='petFriendly'>Pet friendly</label>
+              <input
                 type='checkbox'
                 name='petFriendly'
                 id='petFriendly'
                 onChange={this.handleChange}
-                value='true'
+                checked={petFriendly}
               />
             </div>
           </div>
@@ -155,9 +197,10 @@ class AddTerrace extends Component {
             name='menuPicture'
             id='menuPicture'
             onChange={this.handleChange}
+            value={menuPicture}
           />
           <label htmlFor='sunAmount'>Sun amount</label>
-          <select name='sunAmount' id='sunAmount' onChange={this.handleChange}>
+          <select name='sunAmount' id='sunAmount' onChange={this.handleChange} value={sunAmount}>
             <option value=''>--Please choose an option--</option>
             <option value='totallySunny'>Totally sunny</option>
             <option value='partlySunny'>Partly sunny</option>

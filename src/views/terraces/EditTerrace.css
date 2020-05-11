@@ -1,23 +1,23 @@
-.AddTerrace {
+.EditTerrace {
   background-color: #F8F8F8;
   padding:30px;
 }
 
-.AddTerrace form {
+.EditTerrace form {
   display: flex;
   flex-direction: column;
 }
 
-.AddTerrace label{
+.EditTerrace label{
 	font: 13px Arial, Helvetica, sans-serif;
 	color: #888;
 }
 
-.AddTerrace input[type='text'], 
-            input[type='email'], 
-            textarea, 
-            select 
-            {
+.EditTerrace input[type='text'], 
+              input[type='email'], 
+              textarea, 
+              select 
+{
 	display: block;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -34,12 +34,12 @@
   margin-bottom: 10px;
 }
 
-.AddTerrace-checkboxes {
+.EditTerrace-checkboxes {
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
 }
 
-.AddTerrace-checkbox {
+.EditTerrace-checkbox {
   display: flex;
 }
