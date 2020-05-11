@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
+import './TerraceDetail.css';
 
 class TerraceDetail extends Component {
   state = {
@@ -27,14 +28,37 @@ class TerraceDetail extends Component {
   };
 
   render() {
-    const { name, description, address, _id } = this.state.terrace;
+    const {
+      name, 
+      description, 
+      address, 
+      _id,
+      phone,
+      email,
+      picture,
+      beerPrice,
+      bestTapa,
+      type,
+      liveMusic,
+      petFriendly,
+      menu
+    } = this.state.terrace;
     
     return (
-      <div>
-        <h1>Terrace Detail</h1>
-        <h2>Name: {name}</h2>
-        <p>Description: {description}</p>
-        <p>Address: {address}</p>
+      <div className='TerraceDetail'>
+        <img src={picture} alt={name} />
+        <h1>{name}</h1>
+        <p>{description}</p>
+        <p>{address}</p>
+        <p>Phone: {phone}</p>
+        <p>Email: {email}</p>
+        <p>Beer price: {beerPrice} {beerPrice && '€'}</p>
+        <p>Best tapa: {bestTapa}</p>
+        {type === 'bar' ? <p>Type: Bar</p> : <p>Type: Restaurant</p>}
+        {liveMusic ? <p>Live music: Yes</p> : <p>Live music: No</p>}
+        {petFriendly ? <p>Pet friendly: Yes</p> : <p>Pet friendly: No</p>}
+        <h3>Menu:</h3>
+        <img src={menu} alt='Menu' />
         <Link to={`/terraces/${_id}/edit`}>Edit Terrace</Link>
       </div>
     );
