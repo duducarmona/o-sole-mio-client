@@ -56,7 +56,8 @@ class AuthProvider extends Component {
   handleLogin = ({ username, password }) => {
     apiClient
       .login({ username, password })
-      .then(({ data: user }) => {
+      // .then(({ data: user }) => {
+      .then((user) => {
         this.setState({
           isLoggedIn: true,
           user,
@@ -73,7 +74,8 @@ class AuthProvider extends Component {
   handleSignup = ({ username, password }) => {
     apiClient
       .signup({ username, password })
-      .then(({ data: user }) => {
+      // .then(({ data: user }) => {
+      .then((user) => {
         this.setState({
           isLoggedIn: true,
           user,

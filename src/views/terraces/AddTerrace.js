@@ -5,9 +5,8 @@ import './AddTerrace.css';
 
 class AddTerrace extends Component {
   state = {
-    name: '',
     userId: this.props.user.data._id,
-    description: ''
+    type: 'bar'
   };
 
   handleChange = (e) => {
@@ -125,7 +124,6 @@ class AddTerrace extends Component {
           />
           <label htmlFor='type'>Type</label>
           <select name='type' id='type' onChange={this.handleChange}>
-            {/* <option value="">--Please choose an option--</option> */}
             <option value='bar'>Bar</option>
             <option value='restaurant'>Restaurant</option>
           </select>
