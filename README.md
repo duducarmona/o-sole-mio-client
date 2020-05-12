@@ -115,7 +115,7 @@ Terrace model
 }
 ```
 
-Opinion model
+Review model
 
 ```javascript
 {
