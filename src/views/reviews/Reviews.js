@@ -9,14 +9,9 @@ class Reviews extends Component {
   };
 
   loadReviews = () => {
-    console.log('this.props.location.state.terraceId: ', this.props.location.state.terraceId);
-
     apiClient
-      // .getTerraceDetail(this.props.location.state._id)
       .getReviewsByTerrace(this.props.location.state.terraceId)
       .then(({ data }) => {
-        console.log('getReviews: ', data);
-        
         this.setState({
           reviews: data
         });
@@ -30,6 +25,18 @@ class Reviews extends Component {
     this.loadReviews();
   }
 
+  handleDelete = (id) => {
+    apiClient
+      .deleteReview(id)
+      .then(() => {
+        console.log('done');
+        this.loadReviews();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   renderReviews = () => {
     const { reviews } = this.state;
 
@@ -39,21 +46,23 @@ class Reviews extends Component {
           <h1>{review.title}</h1>
           <p>{review.text}</p>
           {review.rating}
+          <button
+            onClick={(e) => {
+              this.handleDelete(review._id);
+            }}
+          >
+            Delete
+          </button>
         </li>
       );
     });
   };
 
   render() {
-    console.log('RENDER DE REVIEWS');
-    
-    console.log('this.props.location: ', this.props.location);
-
     return (
       <div className='Reviews'>
         <h1>REVIEWS LIST</h1>
         <div className='Reviews-Link'>
-          {/* <Link to={`/terraces/${this.props.location.state._id}/reviews/add`}>Create Review</Link> */}
           <Link to={
             {
               pathname: `/terraces/${this.props.location.state.terraceId}/reviews/add`,

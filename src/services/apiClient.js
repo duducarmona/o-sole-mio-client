@@ -55,6 +55,10 @@ class ApiClient {
   getReviewsByTerrace(terraceId) {
     return this.apiClient.get(`/reviews/${terraceId}`);
   }
+
+  deleteReview(id) {
+    return this.apiClient.delete(`/reviews/${id}`);
+  }
 }
 
 const apiClient = new ApiClient();
