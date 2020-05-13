@@ -63,7 +63,21 @@ class TerraceDetail extends Component {
         {petFriendly ? <p>Pet friendly: Yes</p> : <p>Pet friendly: No</p>}
         <h3>Menu:</h3>
         <img src={menuPicture} alt='Menu' />
-        <Link to={`/terraces/${_id}/edit`}>Edit Terrace</Link>
+        <div className='TerraceDetail-Link'>
+          <Link to={`/terraces/${_id}/edit`}>Edit Terrace</Link>
+        </div>
+        <div className='TerraceDetail-Link'>
+          <Link to={
+            {
+              pathname: `/terraces/${_id}/reviews`,
+              state: {
+                terraceId: _id
+              }
+            }
+          }>
+            Reviews
+          </Link>
+        </div>
       </div>
     );
   }

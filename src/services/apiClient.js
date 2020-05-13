@@ -47,6 +47,14 @@ class ApiClient {
   editTerrace(id, body) {
     return this.apiClient.put(`/terraces/${id}`, body);
   }
+
+  createReview(body) {
+    return this.apiClient.post('/reviews', body);
+  }
+
+  getReviewsByTerrace(terraceId) {
+    return this.apiClient.get(`/reviews/${terraceId}`);
+  }
 }
 
 const apiClient = new ApiClient();
