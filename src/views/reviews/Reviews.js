@@ -53,6 +53,7 @@ class Reviews extends Component {
           >
             Delete
           </button>
+          <Link to={`/reviews/${review._id}/edit`}>Edit Review</Link>
         </li>
       );
     });

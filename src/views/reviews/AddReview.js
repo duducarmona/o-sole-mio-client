@@ -28,9 +28,6 @@ class AddReview extends Component {
       rating
     } = this.state;
 
-    console.log('this.state: ', this.state);
-    
-
     apiClient
       .createReview({
         userId,
@@ -40,8 +37,6 @@ class AddReview extends Component {
         rating
       })
       .then((res) => {
-        console.log(res);
-        // history.push(`/terraces/${res.data.terraceId}/reviews`);
         history.push({
           pathname: `/terraces/${res.data.terraceId}/reviews`,
           state: {
@@ -61,9 +56,6 @@ class AddReview extends Component {
       rating
     } = this.state;
 
-    console.log(this.props);
-    
-
     return (
     <div>
       <h1>New Review</h1>
@@ -77,8 +69,7 @@ class AddReview extends Component {
           value={title}
         />
         <label htmlFor='text'>Review*</label>
-        <input 
-          type='text'
+        <textarea
           name='text'
           id='text'
           onChange={this.handleChange}

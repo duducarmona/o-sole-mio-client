@@ -59,6 +59,14 @@ class ApiClient {
   deleteReview(id) {
     return this.apiClient.delete(`/reviews/${id}`);
   }
+
+  getReviewDetail(id) {
+    return this.apiClient.get(`/reviews/${id}/detail`);
+  }
+
+  editReview(id, body) {
+    return this.apiClient.put(`/reviews/${id}`, body);
+  }
 }
 
 const apiClient = new ApiClient();
