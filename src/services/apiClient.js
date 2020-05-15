@@ -67,6 +67,16 @@ class ApiClient {
   editReview(id, body) {
     return this.apiClient.put(`/reviews/${id}`, body);
   }
+
+  editUser(id, body) {
+    console.log('id: ', id);
+    
+    return this.apiClient.put(`/user/${id}`, body);
+  }
+
+  checkCorrectPassword(password, body) {
+    return this.apiClient.post(`/checkCorrectPassword/${password}`, body);
+  }
 }
 
 const apiClient = new ApiClient();

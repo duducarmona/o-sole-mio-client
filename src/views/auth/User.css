@@ -1,0 +1,23 @@
+.User {
+  padding:30px;
+}
+
+.User form {
+  display: flex;
+  flex-direction: column;
+}
+
+.User-password-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.User-button-save-container {
+  display: flex;
+  justify-content: center;
+}
+
+.User-small-buttons {
+  display: flex;
+  justify-content: space-around;
+}
