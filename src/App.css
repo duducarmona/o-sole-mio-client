@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 .App {
   font: Arial, Helvetica, sans-serif;
-	color: #888;
+  color: #888;
+  margin-bottom: 70px;
 }
 
 .App-logo {
@@ -76,4 +79,38 @@
   padding: 10px;
   border: 1px solid black;
   width: 100px;
+}
+
+.App nav ul {
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 10;
+  padding: 10px;
+  list-style-type: none;
+  border-top: 1px solid rgba(84,84,84,0.10);
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding-left: 0;
+}
+
+.App a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.App nav a {
+  font-size: 11px;
+  font-weight: 700;
+  color: #545454;
+}
+
+.App nav li {
+  text-align: center;
+}
+
+.App nav li.active a {
+  color: #449396;
 }

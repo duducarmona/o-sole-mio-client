@@ -11,7 +11,7 @@ function PrivateRoute({ component: Comp, isLoggedIn, ...rest }) {
         isLoggedIn ? (
           <div>
             <Comp {...props} />
-            <NavbarWithAuth />
+            <NavbarWithAuth rest={rest}/>
           </div>
         ) : (
           <Redirect

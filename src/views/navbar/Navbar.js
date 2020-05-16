@@ -4,12 +4,14 @@ import { withAuth } from '../../context/authContext';
 
 class Navbar extends Component {
   render() {
+    const { path } = this.props.rest;
+    
     return (
       <nav>
         <ul>
-          <li><Link to='/terraces'>Terraces</Link></li>
-          <li><Link to='/terraces/add'>Add Terrace</Link></li>
-          <li><Link to={`/user/${this.props.user.data._id}`}>User Account</Link></li>
+          <li className={`${path === '/terraces' ? 'active' : ''}`}><Link to='/terraces'><i className="material-icons">deck</i><br/>Terraces</Link></li>
+          <li className={`${path === '/terraces/add' ? 'active' : ''}`}><Link to='/terraces/add'><i className="material-icons" onClick={this.handleClick}>add_circle</i><br/>Add Terrace</Link></li>
+          <li className={`${path === `/user/:id` ? 'active' : ''}`}><Link to={`/user/${this.props.user.data._id}`}><i className="material-icons">person_outline</i><br/>Account</Link></li>
         </ul>
       </nav>
     );
