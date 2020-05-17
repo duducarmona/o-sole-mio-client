@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '../../context/authContext';
+import './Navbar.css';
 
 class Navbar extends Component {
   render() {
     const { path } = this.props.rest;
     
     return (
-      <nav>
+      <nav className='Navbar'>
         <ul>
           <li className={`${path === '/terraces' ? 'active' : ''}`}><Link to='/terraces'><i className="material-icons">deck</i><br/>Terraces</Link></li>
           <li className={`${path === '/terraces/add' ? 'active' : ''}`}><Link to='/terraces/add'><i className="material-icons" onClick={this.handleClick}>add_circle</i><br/>Add Terrace</Link></li>

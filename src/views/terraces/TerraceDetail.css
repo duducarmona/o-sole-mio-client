@@ -1,8 +1,14 @@
-.TerraceDetail img {
-    width: 300px;
+.TerraceDetail {
+  padding: 0 10px;
+}
+
+.TerraceDetail h2 {
+  color: black;
+  font-size: 2rem;
+  margin-top: 10px;
 }
 
 .TerraceDetail-Link {
-    border: 1px solid black;
-    padding: 15px;
+  border: 1px solid black;
+  padding: 15px;
 }

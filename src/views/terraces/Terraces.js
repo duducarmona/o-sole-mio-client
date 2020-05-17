@@ -44,16 +44,25 @@ class Terraces extends Component {
       return (
         <li key={index}>
           <Link className='Terraces-Link' to={`/terraces/${terrace._id}`}>
-            <img src={terrace.picture} alt={terrace.name} />
-            {terrace.name}
+            <img className='App-big-img' src={terrace.picture} alt={terrace.name} />
+            <div className='Terraces-info-under-img'>
+              <h2>{terrace.name}</h2>
+              <div className='Terraces-sun-rating'>
+                <img className='Terraces-sun' src='images/sun-icon.png' alt='sun' />
+                <img className='Terraces-sun' src='images/sun-icon.png' alt='sun' />
+                <img className='Terraces-sun' src='images/sun-icon.png' alt='sun' />
+                <img className='Terraces-sun' src='images/sun-icon-grey.png' alt='sun' />
+                <img className='Terraces-sun' src='images/sun-icon-grey.png' alt='sun' />
+              </div>
+            </div>
           </Link>
-          <button
+          {/* <button
             onClick={(e) => {
               this.handleDelete(terrace._id);
             }}
           >
             Delete
-          </button>
+          </button> */}
         </li>
       );
     });
@@ -62,7 +71,6 @@ class Terraces extends Component {
   render() {
     return (
       <div className='Terraces'>
-        {/* <h1>Terraces</h1> */}
         <ul>{this.renderTerraces()}</ul>
       </div>
     );

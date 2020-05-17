@@ -1,0 +1,28 @@
+.Navbar ul {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 10;
+    padding: 10px;
+    list-style-type: none;
+    border-top: 1px solid rgba(84,84,84,0.10);
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .Navbar li {
+    text-align: center;
+  }
+  
+  .Navbar li.active a {
+    color: #449396;
+  }
+
+  .Navbar a {
+    font-size: 11px;
+    font-weight: 700;
+    color: #545454;
+  }

@@ -1,71 +1,50 @@
 .Login {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    padding-top: 70px;
-    background-color: #3C4658;
-    height: 90vh;
-    width: 100vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding-top: 20px;
+  width: 100vw;
+  position: absolute;
 }
 
-.Login-logo {
-    width: 200px;
-    height: 200px;
-    -webkit-animation:spin 15s linear infinite;
-    -moz-animation:spin 15s linear infinite;
-    animation:spin 15s linear infinite;
+.Login-background-image {
+  background-image: url('/images/terrace.jpg');
+  background-repeat: no-repeat;
+  background-position-x: 60%;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
 }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
-.Login h1 {
-  color: white;
-  font-size: 3.5rem;
-  font-family: 'Courgette';
-  margin: 20px;
+.Login-background-image:before {
+	content:'';
+	position: absolute;
+  top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.0);
 }
 
 .Login form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.Login input {
-  margin-top: 20px;
+.Login-Login-Signup {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
-.Login input[type='text'],
-.Login input[type='password']
-{
-    background-color: #FFFFFF;
-    border-radius: 5px;
-    text-align: center;
-    height: 20px;
-    width: 300px;
-    padding: 10px;
-    font-size: 1.3rem;
-}
-
-.Login input[type='submit'] {
-  background-color: #009A9A;
-  border: none;
-  padding: 10px;
-  width: 150px;
+.Login-Login-button {
   color: white;
-  font-size: 1.5rem;
-  margin-top: 40px;
+  background-color: #009A9A;;
 }
 
-.Login p {
-  font-size: 1rem;
-  color: #DCDFE1;
-}
-
-.Login-Link {
-  text-decoration: none;
-  color: #56C6ED;
+.Login-Signup-button {
+  color: #009A9A;
+  background-color: white;
 }

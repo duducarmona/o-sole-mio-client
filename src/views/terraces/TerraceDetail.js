@@ -47,8 +47,8 @@ class TerraceDetail extends Component {
     
     return (
       <div className='TerraceDetail'>
-        <img src={picture} alt={name} />
-        <h1>{name}</h1>
+        <img className='App-big-img' src={picture} alt={name} />
+        <h2>{name}</h2>
         <p>{description}</p>
         {sunAmount === 'totallySunny' && <p>Totally sunny</p>}
         {sunAmount === 'partlySunny' && <p>Partly sunny</p>}

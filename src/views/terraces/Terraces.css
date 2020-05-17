@@ -1,16 +1,35 @@
-.Terraces img {
-    width: 300px;
+.Terraces {
+  padding: 0 10px;
 }
 
 .Terraces ul {
-    padding-left: 40px;
-}
-
-.Terraces li {
-    list-style: none;
+  padding: 0;
 }
 
 .Terraces-Link {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.Terraces-info-under-img {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.Terraces h2 {
+  color: black;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.Terraces-sun-rating {
+  display: flex;
+  margin-top: 15px;
+}
+
+.Terraces-sun {
+  width: 15px;
+  height: 15px;
+  margin: 1px;
 }
