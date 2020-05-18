@@ -1,14 +1,47 @@
-.TerraceDetail {
-  padding: 0 10px;
-}
-
 .TerraceDetail h2 {
   color: black;
   font-size: 2rem;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.TerraceDetail-Link {
-  border: 1px solid black;
-  padding: 15px;
+.TerraceDetail-rating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TerraceDetail-rating-icon {
+  width: 25px;
+  height: 25px;
+  margin: 1px;
+}
+
+.TerraceDetail-reviews {
+  text-align: right;
+}
+
+.TerraceDetail-line {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.TerraceDetail-line i {
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  color: #449396;
+}
+
+.TerraceDetail-line p {
+  font-size: 1rem;
+}
+
+.TerraceDetail-common-font {
+  font-size: 1rem;
+}
+
+.TerraceDetail-rating-p {
+  font-size: 0.7rem;
 }

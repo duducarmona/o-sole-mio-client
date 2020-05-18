@@ -1,9 +1,6 @@
-.Terraces {
-  padding: 0 10px;
-}
-
 .Terraces ul {
   padding: 0;
+  margin: 0;
 }
 
 .Terraces-Link {
@@ -14,7 +11,6 @@
 .Terraces-info-under-img {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
 }
 
 .Terraces h2 {
