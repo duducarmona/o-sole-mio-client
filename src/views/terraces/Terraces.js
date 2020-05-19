@@ -72,7 +72,7 @@ class Terraces extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Terraces'>
         <ul>
           {this.renderTerraces()}
         </ul>
