@@ -1,0 +1,224 @@
+// .AddTerrace {
+
+// }
+
+.AddTerrace-h1 {
+  font-size: 3rem;
+  margin: 20px 0;
+}
+
+.AddTerrace form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.AddTerrace label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #449396;
+}
+
+.AddTerrace input[type='text'], 
+            input[type='email'], 
+            textarea, 
+            select 
+            {
+	display: block;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	padding: 8px;
+	border-radius: 6px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+  border: 2px solid #fff;
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  background-color: #F3F3F3;
+  margin-bottom: 20px;
+}
+
+.AddTerrace-rating-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.AddTerrace-sun-icon {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+
+.AddTerrace-container-switches {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.AddTerrace-switch-labels {
+  display: inline-block;
+  min-width: 125px;
+}
+
+.btn{
+  border: 3px solid #449396;
+  display: inline-block;
+  padding: 5px;
+  position: relative;
+  text-align: center;
+  transition: background 600ms ease, color 600ms ease;
+  border-radius: 6px;
+}
+
+// type
+input[type="radio"].type-toggle {
+  display: none;
+  & + label{
+      cursor: pointer;
+      min-width: 50px;
+      &:hover{
+          background: none;
+          color: #449396;
+      }
+      &:after{
+          background: #449396;
+          content: "";
+          height: 100%;
+          position: absolute;
+          top: 0;
+          transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+          width: 100%;
+          z-index: -1;
+      }
+  }
+  &.type-toggle-left + label {
+      border-right: 0;
+      &:after{
+          left: 100%
+      }
+  }
+  &.type-toggle-right + label{
+      margin-left: -5px;
+      &:after{
+          left: -100%;
+      }
+  }
+  &:checked + label {
+      cursor: default;
+      color: #fff;
+      transition: color 200ms;
+      &:after{
+          left: 0;
+      }
+  }
+}
+
+// liveMusic
+input[type="radio"].liveMusic-toggle {
+  display: none;
+  & + label{
+      cursor: pointer;
+      min-width: 50px;
+      &:hover{
+          background: none;
+          color: #449396;
+      }
+      &:after{
+          background: #449396;
+          content: "";
+          height: 100%;
+          position: absolute;
+          top: 0;
+          transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+          width: 100%;
+          z-index: -1;
+      }
+  }
+  &.liveMusic-toggle-left + label {
+      border-right: 0;
+      &:after{
+          left: 100%
+      }
+  }
+  &.liveMusic-toggle-right + label{
+      margin-left: -5px;
+      &:after{
+          left: -100%;
+      }
+  }
+  &:checked + label {
+      cursor: default;
+      color: #fff;
+      transition: color 200ms;
+      &:after{
+          left: 0;
+      }
+  }
+}
+
+// petfriendly
+input[type="radio"].petFriendly-toggle {
+  display: none;
+  & + label{
+      cursor: pointer;
+      min-width: 50px;
+      &:hover{
+          background: none;
+          color: #449396;
+      }
+      &:after{
+          background: #449396;
+          content: "";
+          height: 100%;
+          position: absolute;
+          top: 0;
+          transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+          width: 100%;
+          z-index: -1;
+      }
+  }
+  &.petFriendly-toggle-left + label {
+      border-right: 0;
+      &:after{
+          left: 100%
+      }
+  }
+  &.petFriendly-toggle-right + label{
+      margin-left: -5px;
+      &:after{
+          left: -100%;
+      }
+  }
+  &:checked + label {
+      cursor: default;
+      color: #fff;
+      transition: color 200ms;
+      &:after{
+          left: 0;
+      }
+  }
+}
+
+.AddTerrace-submit-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.AddTerrace-submit
+{
+  border: none;
+  padding: 10px;
+  width: 200px;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: white;
+  background-color: #009A9A;
+  border-radius: 5px;
+}

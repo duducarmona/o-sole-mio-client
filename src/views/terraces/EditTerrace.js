@@ -142,7 +142,7 @@ class EditTerrace extends Component {
       petFriendly,
       menuPicture,
       sunAmount,
-      sunRegisterTime
+      // sunRegisterTime
     } = this.state;
     
     return (

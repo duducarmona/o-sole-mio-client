@@ -28,7 +28,7 @@ class ApiClient {
     return this.apiClient.get('/protected');
   }
 
-  createTerrace(body) {
+  createTerrace(body) { 
     return this.apiClient.post('/terraces', body);
   }
 
@@ -69,14 +69,12 @@ class ApiClient {
   }
 
   editUser(id, body) {
-    console.log('id: ', id);
-    
     return this.apiClient.put(`/user/${id}`, body);
   }
 
-  checkCorrectPassword(password, body) {
-    return this.apiClient.post(`/checkCorrectPassword/${password}`, body);
-  }
+  // checkCorrectPassword(password, body) {
+  //   return this.apiClient.post(`/checkCorrectPassword/${password}`, body);
+  // }
 }
 
 const apiClient = new ApiClient();

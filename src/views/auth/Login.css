@@ -33,6 +33,10 @@
   align-items: center;
 }
 
+.Login input {
+  margin-top: 20px;
+}
+
 .Login-Login-Signup {
   display: flex;
   justify-content: space-around;
@@ -41,7 +45,7 @@
 
 .Login-Login-button {
   color: white;
-  background-color: #009A9A;;
+  background-color: #009A9A;
 }
 
 .Login-Signup-button {

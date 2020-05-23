@@ -60,7 +60,7 @@ class TerraceDetail extends Component {
     } = this.state.terrace;
     
     return (
-      <div>
+      <div className='TerraceDetail'>
         <img className='App-big-img' src={picture} alt={name} />
         <div className='App-with-padding'>
           <h2>{name}</h2>

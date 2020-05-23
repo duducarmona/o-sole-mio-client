@@ -16,15 +16,15 @@ class User extends Component {
     // const { history } = this.props;
     const {
       username,
-      currentPassword
+      // currentPassword
     } = this.state;
 
-    apiClient
-      .checkCorrectPassword(currentPassword, { hashedPassword: this.props.user.data.hashedPassword })
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
+    // apiClient
+    //   .checkCorrectPassword(currentPassword, { hashedPassword: this.props.user.data.hashedPassword })
+    //   .then()
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     apiClient
       .editUser(this.props.match.params.id, {

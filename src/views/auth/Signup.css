@@ -33,6 +33,10 @@
   align-items: center;
 }
 
+.Signup input {
+  margin-top: 20px;
+}
+
 .Signup-Signup-Login {
   display: flex;
   justify-content: space-around;

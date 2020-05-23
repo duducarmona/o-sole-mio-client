@@ -36,9 +36,9 @@ class Signup extends Component {
     return (
       <div className='Signup-background-image'>
         <div className='Signup'>
-          <h1>O Sole Mio</h1>
+          <h1 className='App-h1-login-signup'>O Sole Mio</h1>
           <form onSubmit={this.handleSubmit}>
-            <input
+            <input className='App-login-signup-textbox'
               type="text"
               name="username"
               id="username"
@@ -46,7 +46,7 @@ class Signup extends Component {
               value={username}
               onChange={this.handleChange}
             />
-            <input
+            <input className='App-login-signup-textbox'
               type="password"
               name="password"
               id="password"
@@ -55,8 +55,8 @@ class Signup extends Component {
               onChange={this.handleChange}
             />
             <div className='Signup-Signup-Login'>
-              <input className='Signup-Signup-button' type='submit' value='SIGNUP' />
-              <input className='Signup-Login-button' type='submit' value='LOGIN' onClick={this.goToLogin}/>
+              <input className='Signup-Signup-button App-login-signup-submit' type='submit' value='SIGNUP' />
+              <input className='Signup-Login-button App-login-signup-submit' type='submit' value='LOGIN' onClick={this.goToLogin}/>
             </div>
           </form>
         </div>

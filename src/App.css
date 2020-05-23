@@ -9,55 +9,29 @@
   padding: 0 10px;
 }
 
-.App label {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.App input {
-  margin-top: 20px;
-
-  /* background-color: #EEEEEE;
-  box-sizing: border-box;
-  padding: 15px;
-  border-radius: 6px;
-  border: 2px solid #fff;
-  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
-  margin-bottom: 10px; */
-}
-
-.App  input[type='text'], 
-      input[type='password'] {
+.App-login-signup-textbox  
+{
   font-size: 1.4rem;
-
   background-color: #FFFFFF;
   border-radius: 5px;
   text-align: center;
   height: 20px;
   width: 300px;
   padding: 10px;
-  /* font-size: 1.3rem; */
 }
 
-.App input[type='submit'] {
-  /* background-color: #009A9A; */
-  /* color: white;
-  font-size: 1.5rem;
-  width: 225px; */
+.App-login-signup-submit
+{
   border: none;
   padding: 10px;
-  /* width: 150px; */
   width: 125px;
-  /* color: white; */
   font-size: 1.5rem;
   margin-top: 40px;
+  border-radius: 5px;
 }
 
-.App h1 {
+.App-h1-login-signup {
   margin-top: 0;
-
-
-
   color: #FFDC00;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-size: 4rem;
