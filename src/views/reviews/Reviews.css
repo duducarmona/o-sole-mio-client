@@ -1,4 +1,68 @@
-.Reviews-Link {
-  border: 1px solid black;
-  padding: 15px;
+.Reviews {
+  font-size: 1rem;
+}
+
+.Reviews i {
+  color: #449396;
+}
+
+.Reviews h2 {
+  font-size: 2rem;
+  color: #449396;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.Reviews h3 {
+  font-size: 1.5rem;
+  color: #449396;
+  margin: 15px 0;
+  max-width: 300px;
+}
+
+.Reviews h4 {
+  font-weight: lighter;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.Reviews li {
+  border-bottom: 1px solid rgba(84,84,84,1);
+  padding: 0 10px;
+  padding-bottom: 20px;
+}
+
+.Reviews-rating-edit-delete-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Reviews ul {
+  padding: 0;
+  margin-top: 0;
+}
+
+.Reviews p {
+  margin: 0;
+}
+
+.Reviews-add-container {
+  position: absolute;
+  top: 150px;
+  right: 17px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Reviews-add {
+  background-color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  color: #449396;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
 }

@@ -207,7 +207,7 @@ class EditTerrace extends Component {
 
     return (
       <div className='EditTerrace App-with-padding'>
-        <h1 className='AddTerrace-EditTerrace-h1'>Edit Terrace</h1>
+        <h1 className='view-h1'>Edit Terrace</h1>
         <form className='AddTerrace-EditTerrace-form' onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
           <input

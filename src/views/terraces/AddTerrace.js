@@ -123,7 +123,7 @@ class AddTerrace extends Component {
 
     return (
       <div className='AddTerrace App-with-padding'>
-        <h1 className='AddTerrace-EditTerrace-h1'>Add Terrace</h1>
+        <h1 className='view-h1'>Add Terrace</h1>
         <form className='AddTerrace-EditTerrace-form' onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
           <input

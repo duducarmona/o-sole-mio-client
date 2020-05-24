@@ -55,8 +55,7 @@ class TerraceDetail extends Component {
       type,
       liveMusic,
       petFriendly,
-      menuPicture,
-      // sunAmount
+      menuPicture
     } = this.state.terrace;
     
     return (
@@ -77,7 +76,8 @@ class TerraceDetail extends Component {
               {
                 pathname: `/terraces/${_id}/reviews`,
                 state: {
-                  terraceId: _id
+                  terraceId: _id,
+                  terraceName: name
                 }
               }
             }>
@@ -92,9 +92,6 @@ class TerraceDetail extends Component {
             </Link>
           </div>
           <p className='TerraceDetail-common-font'>{description}</p>
-          {/* {sunAmount === 'totallySunny' && <p>Totally sunny</p>}
-          {sunAmount === 'partlySunny' && <p>Partly sunny</p>}
-          {sunAmount === 'notSunny' && <p>Not sunny</p>} */}
           <div className='TerraceDetail-line'>
             <i className="material-icons">place</i>
             <p>{address}</p>
