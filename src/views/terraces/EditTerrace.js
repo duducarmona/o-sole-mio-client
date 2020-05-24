@@ -10,13 +10,20 @@ class EditTerrace extends Component {
     phone: '',
     email: '',
     picture: '',
-    beerPrice: '',
+    beerPrice: 0,
     bestTapa: '',
     type: '',
     liveMusic: false,
     petFriendly: false,
     menuPicture: '',
-    sunAmount: '',
+    sunAmount: 0,
+    sunImage: [
+      '/images/sun-icon-grey.png',
+      '/images/sun-icon-grey.png',
+      '/images/sun-icon-grey.png',
+      '/images/sun-icon-grey.png',
+      '/images/sun-icon-grey.png'
+    ],
     sunRegisterTime: '' 
   }
 
@@ -24,61 +31,116 @@ class EditTerrace extends Component {
     this.getTerraceDetail();
   }
 
-  getTerraceDetail = () => {
+  getTerraceDetail = async () => {
     const { params } = this.props.match;
+    const { sunImage } = this.state;
+    const newSunImage = [];
+    let responseFromApi = undefined;
+
+    try {
+      responseFromApi = await apiClient.getTerraceDetail(params.id);   
+    } catch (error) {
+      console.log(error);
+    }
+
+    const terrace = responseFromApi.data;
     
-    apiClient
-      .getTerraceDetail(params.id)
-      .then((responseFromApi) => {
-        const terrace = responseFromApi.data;
-        const { 
-          name, 
-          description,
-          address,
-          phone,
-          email,
-          picture,
-          beerPrice,
-          bestTapa,
-          type,
-          liveMusic,
-          petFriendly,
-          menuPicture,
-          sunAmount,
-          sunRegisterTime
-        } = terrace;
-        
-        this.setState({
-          name,
-          description,
-          address,
-          phone,
-          email,
-          picture,
-          beerPrice,
-          bestTapa,
-          type,
-          liveMusic,
-          petFriendly,
-          menuPicture,
-          sunAmount,
-          sunRegisterTime
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const {
+      name, 
+      description,
+      address,
+      phone,
+      email,
+      picture,
+      beerPrice,
+      bestTapa,
+      type,
+      liveMusic,
+      petFriendly,
+      menuPicture,
+      sunAmount,
+      sunRegisterTime
+    } = terrace;
+
+    this.setState({
+      name,
+      description,
+      address,
+      phone,
+      email,
+      picture,
+      beerPrice: (beerPrice === null ? 0 : beerPrice),
+      bestTapa,
+      type,
+      liveMusic,
+      petFriendly,
+      menuPicture,
+      sunAmount,
+      sunRegisterTime
+    });
+
+    for (let index = 0; index < sunAmount; index++) {
+      newSunImage.push('/images/sun-icon.png');
+    }
+
+    for (let index = sunAmount; index < sunImage.length; index++) {
+      newSunImage.push('/images/sun-icon-grey.png');
+    }
+
+    this.setState({
+      sunImage: newSunImage
+    });
   };
 
   handleChange = (e) => {
     const target = e.target;
-    const value = (target.name === 'liveMusic' || target.name === 'petFriendly') ? target.checked : target.value;
+    let value;
     const name = target.name;
+    const {
+      liveMusic,
+      petFriendly
+    } = this.state;
+
+    if (name === 'liveMusic') {
+      value = !liveMusic;
+    }
+    else if (name === 'petFriendly') {
+      value = !petFriendly;
+    }
+    else {
+      value = target.value;
+    }
 
     this.setState({
       [name]: value
     });
   };
+
+  handleRating = (sunPos) => {
+    const { sunAmount, sunImage } = this.state;
+    let newSunAmount = 1;
+    const newSunImage = [];
+
+    if (sunPos === 1 && sunAmount === 1) {
+      newSunAmount = 0;
+    }
+    else {
+      newSunAmount = sunPos;
+    }
+
+    for (let index = 0; index < newSunAmount; index++) {
+      newSunImage.push('/images/sun-icon.png');
+    }
+
+    for (let index = newSunAmount; index < sunImage.length; index++) {
+      newSunImage.push('/images/sun-icon-grey.png');
+    }
+
+    this.setState({
+      sunAmount: newSunAmount,
+      sunImage: newSunImage
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -98,8 +160,7 @@ class EditTerrace extends Component {
       liveMusic,
       petFriendly,
       menuPicture,
-      sunAmount,
-      // sunRegisterTime 
+      sunAmount
     } = this.state;
 
     apiClient
@@ -117,7 +178,7 @@ class EditTerrace extends Component {
         petFriendly,
         menuPicture,
         sunAmount,
-        // sunRegisterTime 
+        sunRegisterTime: new Date()
       })
       .then((res) => {
         history.push(`/terraces/${id}`);
@@ -141,14 +202,13 @@ class EditTerrace extends Component {
       liveMusic,
       petFriendly,
       menuPicture,
-      sunAmount,
-      // sunRegisterTime
+      sunImage
     } = this.state;
-    
+
     return (
-      <div className='EditTerrace'>
-        <h1>Edit Terrace</h1>
-        <form onSubmit={this.handleSubmit}>
+      <div className='EditTerrace App-with-padding'>
+        <h1 className='AddTerrace-EditTerrace-h1'>Edit Terrace</h1>
+        <form className='AddTerrace-EditTerrace-form' onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
           <input
             type='text'
@@ -161,6 +221,7 @@ class EditTerrace extends Component {
           <textarea
             name='description'
             id='description'
+            rows='3'
             onChange={this.handleChange}
             value={description}
           />
@@ -188,6 +249,16 @@ class EditTerrace extends Component {
             onChange={this.handleChange}
             value={email}
           />
+          <label htmlFor='sunAmount'>Sun amount</label>
+          <div className='AddTerrace-EditTerrace-rating-container'>
+            <div>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[0]} alt='sun' onClick={() => {this.handleRating(1)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[1]} alt='sun' onClick={() => {this.handleRating(2)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[2]} alt='sun' onClick={() => {this.handleRating(3)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[3]} alt='sun' onClick={() => {this.handleRating(4)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[4]} alt='sun' onClick={() => {this.handleRating(5)}}/>
+            </div>
+          </div>
           <label htmlFor='picture'>Picture</label>
           <input
             type='text'
@@ -212,31 +283,29 @@ class EditTerrace extends Component {
             onChange={this.handleChange}
             value={bestTapa}
           />
-          <label htmlFor='type'>Type</label>
-          <select name='type' id='type' onChange={this.handleChange} value={type}>
-            <option value='bar'>Bar</option>
-            <option value='restaurant'>Restaurant</option>
-          </select>
-          <div className='EditTerrace-checkboxes'>
-            <div className='EditTerrace-checkbox'>
-              <label htmlFor='liveMusic'>Live music</label>
-              <input
-                type='checkbox'
-                name='liveMusic'
-                id='liveMusic'
-                onChange={this.handleChange}
-                checked={liveMusic}
-              />
-            </div>
-            <div className='EditTerrace-checkbox'>
-              <label htmlFor='petFriendly'>Pet friendly</label>
-              <input
-                type='checkbox'
-                name='petFriendly'
-                id='petFriendly'
-                onChange={this.handleChange}
-                checked={petFriendly}
-              />
+          <div className='AddTerrace-EditTerrace-container-switches'>
+            <div>
+              <div>
+                <label className='AddTerrace-EditTerrace-switch-labels' htmlFor='type'>Type</label>
+                <input id="type-toggle-on" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-left" name="type" value="bar" type="radio" onChange={this.handleChange} checked={type==='bar'} />
+                <label htmlFor="type-toggle-on" className="AddTerrace-EditTerrace-switch"><i className="material-icons">local_bar</i></label>
+                <input id="type-toggle-off" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-right" name="type" value="restaurant" type="radio" onChange={this.handleChange} checked={type==='restaurant'} />
+                <label htmlFor="type-toggle-off" className="AddTerrace-EditTerrace-switch"><i className="material-icons">restaurant</i></label>
+              </div>
+              <div>
+                <label className='AddTerrace-EditTerrace-switch-labels' htmlFor='liveMusic'>Live music</label>
+                <input id="liveMusic-toggle-on" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-left" name="liveMusic" type="radio" onChange={this.handleChange} checked={!liveMusic} />
+                <label htmlFor="liveMusic-toggle-on" className="AddTerrace-EditTerrace-switch">No</label>
+                <input id="liveMusic-toggle-off" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-right" name="liveMusic" type="radio" onChange={this.handleChange} checked={liveMusic} />
+                <label htmlFor="liveMusic-toggle-off" className="AddTerrace-EditTerrace-switch">Yes</label>
+              </div>
+              <div>
+                <label className='AddTerrace-EditTerrace-switch-labels' htmlFor='petFriendly'>Pet friendly</label>
+                <input id="petFriendly-toggle-on" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-left" name="petFriendly" type="radio" onChange={this.handleChange} checked={!petFriendly} />
+                <label htmlFor="petFriendly-toggle-on" className="AddTerrace-EditTerrace-switch">No</label>
+                <input id="petFriendly-toggle-off" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-right" name="petFriendly" type="radio" onChange={this.handleChange} checked={petFriendly} />
+                <label htmlFor="petFriendly-toggle-off" className="AddTerrace-EditTerrace-switch">Yes</label>
+              </div>
             </div>
           </div>
           <label htmlFor='menuPicture'>Menu picture</label>
@@ -247,14 +316,9 @@ class EditTerrace extends Component {
             onChange={this.handleChange}
             value={menuPicture}
           />
-          <label htmlFor='sunAmount'>Sun amount</label>
-          <select name='sunAmount' id='sunAmount' onChange={this.handleChange} value={sunAmount}>
-            <option value=''>--Please choose an option--</option>
-            <option value='totallySunny'>Totally sunny</option>
-            <option value='partlySunny'>Partly sunny</option>
-            <option value='notSunny'>Not sunny</option>
-          </select>
-          <input type='submit' value='submit' />
+          <div className='AddTerrace-EditTerrace-submit-container'>
+            <input className='AddTerrace-EditTerrace-submit' type='submit' value='SAVE TERRACE' />
+          </div>
         </form>
       </div>
     );

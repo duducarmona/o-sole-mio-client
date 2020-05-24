@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withAuth } from '../../context/authContext';
 import apiClient from '../../services/apiClient';
 import './User.css';
-import '../../App.css';
+import '../../App.scss';
 
 class User extends Component {
   state = {

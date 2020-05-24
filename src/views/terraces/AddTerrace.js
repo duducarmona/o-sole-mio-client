@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { withAuth } from '../../context/authContext';
-import './AddTerrace.scss';
+import './AddTerrace.css';
 
 class AddTerrace extends Component {
   state = {
@@ -15,7 +15,7 @@ class AddTerrace extends Component {
     phone: '',
     email: '',
     picture: '',
-    beerPrice: '',
+    beerPrice: 0,
     bestTapa: '',
     menuPicture: '',
     sunAmount: 0,
@@ -123,8 +123,8 @@ class AddTerrace extends Component {
 
     return (
       <div className='AddTerrace App-with-padding'>
-        <h1 className='AddTerrace-h1'>Add Terrace</h1>
-        <form onSubmit={this.handleSubmit}>
+        <h1 className='AddTerrace-EditTerrace-h1'>Add Terrace</h1>
+        <form className='AddTerrace-EditTerrace-form' onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
           <input
             type='text'
@@ -166,13 +166,13 @@ class AddTerrace extends Component {
             value={email}
           />
           <label htmlFor='sunAmount'>Sun amount</label>
-          <div className='AddTerrace-rating-container'>
+          <div className='AddTerrace-EditTerrace-rating-container'>
             <div>
-              <img className='AddTerrace-sun-icon' src={sunImage[0]} alt='sun' onClick={() => {this.handleRating(1)}}/>
-              <img className='AddTerrace-sun-icon' src={sunImage[1]} alt='sun' onClick={() => {this.handleRating(2)}}/>
-              <img className='AddTerrace-sun-icon' src={sunImage[2]} alt='sun' onClick={() => {this.handleRating(3)}}/>
-              <img className='AddTerrace-sun-icon' src={sunImage[3]} alt='sun' onClick={() => {this.handleRating(4)}}/>
-              <img className='AddTerrace-sun-icon' src={sunImage[4]} alt='sun' onClick={() => {this.handleRating(5)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[0]} alt='sun' onClick={() => {this.handleRating(1)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[1]} alt='sun' onClick={() => {this.handleRating(2)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[2]} alt='sun' onClick={() => {this.handleRating(3)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[3]} alt='sun' onClick={() => {this.handleRating(4)}}/>
+              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[4]} alt='sun' onClick={() => {this.handleRating(5)}}/>
             </div>
           </div>
           <label htmlFor='picture'>Picture</label>
@@ -199,28 +199,28 @@ class AddTerrace extends Component {
             onChange={this.handleChange}
             value={bestTapa}
           />
-          <div className='AddTerrace-container-switches'>
+          <div className='AddTerrace-EditTerrace-container-switches'>
             <div>
               <div>
-                <label className='AddTerrace-switch-labels' htmlFor='type'>Type</label>
-                <input id="type-toggle-on" className="type-toggle type-toggle-left" name="type" value="bar" type="radio" defaultChecked onChange={this.handleChange} />
-                <label htmlFor="type-toggle-on" className="btn"><i className="material-icons">local_bar</i></label>
-                <input id="type-toggle-off" className="type-toggle type-toggle-right" name="type" value="restaurant" type="radio" onChange={this.handleChange} />
-                <label htmlFor="type-toggle-off" className="btn"><i className="material-icons">restaurant</i></label>
+                <label className='AddTerrace-EditTerrace-switch-labels' htmlFor='type'>Type</label>
+                <input id="type-toggle-on" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-left" name="type" value="bar" type="radio" defaultChecked onChange={this.handleChange} />
+                <label htmlFor="type-toggle-on" className="AddTerrace-EditTerrace-switch"><i className="material-icons">local_bar</i></label>
+                <input id="type-toggle-off" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-right" name="type" value="restaurant" type="radio" onChange={this.handleChange} />
+                <label htmlFor="type-toggle-off" className="AddTerrace-EditTerrace-switch"><i className="material-icons">restaurant</i></label>
               </div>
               <div>
-                <label className='AddTerrace-switch-labels' htmlFor='liveMusic'>Live music</label>
-                <input id="liveMusic-toggle-on" className="liveMusic-toggle liveMusic-toggle-left" name="liveMusic" value="false" type="radio" defaultChecked onChange={this.handleChange} />
-                <label htmlFor="liveMusic-toggle-on" className="btn">No</label>
-                <input id="liveMusic-toggle-off" className="liveMusic-toggle liveMusic-toggle-right" name="liveMusic" value="true" type="radio" onChange={this.handleChange} />
-                <label htmlFor="liveMusic-toggle-off" className="btn">Yes</label>
+                <label className='AddTerrace-EditTerrace-switch-labels' htmlFor='liveMusic'>Live music</label>
+                <input id="liveMusic-toggle-on" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-left" name="liveMusic" value="false" type="radio" defaultChecked onChange={this.handleChange} />
+                <label htmlFor="liveMusic-toggle-on" className="AddTerrace-EditTerrace-switch">No</label>
+                <input id="liveMusic-toggle-off" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-right" name="liveMusic" value="true" type="radio" onChange={this.handleChange} />
+                <label htmlFor="liveMusic-toggle-off" className="AddTerrace-EditTerrace-switch">Yes</label>
               </div>
               <div>
-                <label className='AddTerrace-switch-labels' htmlFor='petFriendly'>Pet friendly</label>
-                <input id="petFriendly-toggle-on" className="petFriendly-toggle petFriendly-toggle-left" name="petFriendly" value="false" type="radio" defaultChecked onChange={this.handleChange} />
-                <label htmlFor="petFriendly-toggle-on" className="btn">No</label>
-                <input id="petFriendly-toggle-off" className="petFriendly-toggle petFriendly-toggle-right" name="petFriendly" value="true" type="radio" onChange={this.handleChange} />
-                <label htmlFor="petFriendly-toggle-off" className="btn">Yes</label>
+                <label className='AddTerrace-EditTerrace-switch-labels' htmlFor='petFriendly'>Pet friendly</label>
+                <input id="petFriendly-toggle-on" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-left" name="petFriendly" value="false" type="radio" defaultChecked onChange={this.handleChange} />
+                <label htmlFor="petFriendly-toggle-on" className="AddTerrace-EditTerrace-switch">No</label>
+                <input id="petFriendly-toggle-off" className="AddTerrace-EditTerrace-switch-toggle AddTerrace-EditTerrace-switch-toggle-right" name="petFriendly" value="true" type="radio" onChange={this.handleChange} />
+                <label htmlFor="petFriendly-toggle-off" className="AddTerrace-EditTerrace-switch">Yes</label>
               </div>
             </div>
           </div>
@@ -232,8 +232,8 @@ class AddTerrace extends Component {
             onChange={this.handleChange}
             value={menuPicture}
           />
-          <div className='AddTerrace-submit-container'>
-            <input className='AddTerrace-submit' type='submit' value='SAVE TERRACE' />
+          <div className='AddTerrace-EditTerrace-submit-container'>
+            <input className='AddTerrace-EditTerrace-submit' type='submit' value='SAVE TERRACE' />
           </div>
         </form>
       </div>

@@ -1,13 +1,13 @@
-.EditTerrace label {
-	font-size: 1.2rem;
-	margin-bottom: 10px;
-	color: #449396;
+.AddTerrace label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #449396;
 }
 
-.EditTerrace  input[type='text'], 
-              input[type='email'], 
-              textarea 
-{
+.AddTerrace input[type='text'], 
+            input[type='email'], 
+            textarea 
+            {
 	display: block;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
