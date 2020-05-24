@@ -65,8 +65,8 @@ class User extends Component {
     const { onLogout } = this.props;
 
     return (
-      <div className='User'>
-        <h1>My account</h1>
+      <div className='User App-with-padding'>
+        <h1 className='view-h1'>My account</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='username'>Username</label>
           <input 
@@ -110,8 +110,8 @@ class User extends Component {
               </div>
             }
           </div>
-          <div className='User-button-save-container'>
-            <input type='submit' value='SAVE CHANGES' />
+          <div className='submit-button-container'>
+            <input className='submit-button' type='submit' value='SAVE ACCOUNT' />
           </div>
           <div className='User-small-buttons'>
             {
