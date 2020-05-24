@@ -91,14 +91,14 @@
   padding-bottom: 0;
 }
 
-.AddTerrace-EditTerrace-rating-container {
+.rating-icon-editable-container {
   display: flex;
   justify-content: center;
   margin-top: 10px;
   margin-bottom: 25px;
 }
 
-.AddTerrace-EditTerrace-sun-icon {
+.rating-icon-editable {
   width: 50px;
   height: 50px;
   margin: 5px;
@@ -167,13 +167,13 @@ input[type="radio"].AddTerrace-EditTerrace-switch-toggle {
   }
 }
 
-.AddTerrace-EditTerrace-submit-container {
+.submit-button-container {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.AddTerrace-EditTerrace-submit
+.submit-button
 {
   border: none;
   padding: 10px;

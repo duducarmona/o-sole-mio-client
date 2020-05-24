@@ -123,7 +123,7 @@ class AddTerrace extends Component {
 
     return (
       <div className='AddTerrace App-with-padding'>
-        <h1 className='view-h1'>Add Terrace</h1>
+        <h1 className='view-h1'>Add terrace</h1>
         <form className='AddTerrace-EditTerrace-form' onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
           <input
@@ -166,13 +166,13 @@ class AddTerrace extends Component {
             value={email}
           />
           <label htmlFor='sunAmount'>Sun amount</label>
-          <div className='AddTerrace-EditTerrace-rating-container'>
+          <div className='rating-icon-editable-container'>
             <div>
-              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[0]} alt='sun' onClick={() => {this.handleRating(1)}}/>
-              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[1]} alt='sun' onClick={() => {this.handleRating(2)}}/>
-              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[2]} alt='sun' onClick={() => {this.handleRating(3)}}/>
-              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[3]} alt='sun' onClick={() => {this.handleRating(4)}}/>
-              <img className='AddTerrace-EditTerrace-sun-icon' src={sunImage[4]} alt='sun' onClick={() => {this.handleRating(5)}}/>
+              <img className='rating-icon-editable' src={sunImage[0]} alt='sun' onClick={() => {this.handleRating(1)}}/>
+              <img className='rating-icon-editable' src={sunImage[1]} alt='sun' onClick={() => {this.handleRating(2)}}/>
+              <img className='rating-icon-editable' src={sunImage[2]} alt='sun' onClick={() => {this.handleRating(3)}}/>
+              <img className='rating-icon-editable' src={sunImage[3]} alt='sun' onClick={() => {this.handleRating(4)}}/>
+              <img className='rating-icon-editable' src={sunImage[4]} alt='sun' onClick={() => {this.handleRating(5)}}/>
             </div>
           </div>
           <label htmlFor='picture'>Picture</label>
@@ -232,8 +232,8 @@ class AddTerrace extends Component {
             onChange={this.handleChange}
             value={menuPicture}
           />
-          <div className='AddTerrace-EditTerrace-submit-container'>
-            <input className='AddTerrace-EditTerrace-submit' type='submit' value='SAVE TERRACE' />
+          <div className='submit-button-container'>
+            <input className='submit-button' type='submit' value='SAVE TERRACE' />
           </div>
         </form>
       </div>
