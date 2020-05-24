@@ -1,42 +1,69 @@
 import React, { Component } from "react";
 import apiClient from '../../services/apiClient';
+import './EditReview.css';
 
 class EditReview extends Component {
   state = {
     title: '',
     text: '',
     rating: 0,
-    terraceId: ''
+    terraceId: '',
+    ratingImage: [
+      '/images/star-icon-grey.png',
+      '/images/star-icon-grey.png',
+      '/images/star-icon-grey.png',
+      '/images/star-icon-grey.png',
+      '/images/star-icon-grey.png'
+    ]
   }
 
   componentDidMount() {
     this.getReviewDetail();
   }
 
-  getReviewDetail = () => {
-    const { params } = this.props.match;
+  fillRating = () => {
+    const { rating, ratingImage } = this.state;
+    const newRatingImage = [];
     
-    apiClient
-      .getReviewDetail(params.id)
-      .then((responseFromApi) => {
-        const review = responseFromApi.data;
-        const { 
-          title, 
-          text,
-          rating,
-          terraceId
-        } = review;
-        
-        this.setState({
-          title,
-          text,
-          rating,
-          terraceId
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    for (let index = 0; index < rating; index++) {
+      newRatingImage.push('/images/star-icon-blue.png');
+    }
+
+    for (let index = rating; index < ratingImage.length; index++) {
+      newRatingImage.push('/images/star-icon-grey.png');
+    }
+
+    this.setState({
+      ratingImage: newRatingImage
+    });
+  }
+
+  getReviewDetail = async () => {
+    let { params } = this.props.match;
+    let responseFromApi = undefined;
+
+    try {
+      responseFromApi = await apiClient.getReviewDetail(params.id);
+    } catch (error) {
+      console.log(error);
+    }
+
+    const review = responseFromApi.data;
+    const { 
+      title, 
+      text,
+      rating,
+      terraceId
+    } = review;
+    
+    this.setState({
+      title,
+      text,
+      rating,
+      terraceId
+    });
+
+    this.fillRating();
   };
 
   handleChange = (e) => {
@@ -44,6 +71,32 @@ class EditReview extends Component {
       [e.target.name]: e.target.value
     });
   };
+
+  handleRating = (ratingPos) => {
+    const { rating, ratingImage } = this.state;
+    let newRating = 1;
+    const newRatingImage = [];
+
+    if (ratingPos === 1 && rating === 1) {
+      newRating = 0;
+    }
+    else {
+      newRating = ratingPos;
+    }
+
+    for (let index = 0; index < newRating; index++) {
+      newRatingImage.push('/images/star-icon-blue.png');
+    }
+
+    for (let index = newRating; index < ratingImage.length; index++) {
+      newRatingImage.push('/images/star-icon-grey.png');
+    }
+
+    this.setState({
+      rating: newRating,
+      ratingImage: newRatingImage
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -79,12 +132,12 @@ class EditReview extends Component {
     const { 
       title,
       text,
-      rating
+      ratingImage
     } = this.state;
 
     return (
-      <div>
-        <h1>Edit Review</h1>
+      <div className='EditReview App-with-padding'>
+        <h1 className='view-h1'>Edit review</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='title'>Title*</label>
           <input
@@ -98,18 +151,22 @@ class EditReview extends Component {
           <textarea
             name='text'
             id='text'
+            rows='8'
             onChange={this.handleChange}
             value={text}
           />
-          <label htmlFor='rating'>Rating*</label>
-          <input
-            type='text'
-            name='rating'
-            id='rating'
-            onChange={this.handleChange}
-            value={rating}
-          />
-          <input type='submit' value='submit' />
+          <div className='rating-icon-editable-container'>
+            <div>
+              <img className='rating-icon-editable' src={ratingImage[0]} alt='star' onClick={() => {this.handleRating(1)}}/>
+              <img className='rating-icon-editable' src={ratingImage[1]} alt='star' onClick={() => {this.handleRating(2)}}/>
+              <img className='rating-icon-editable' src={ratingImage[2]} alt='star' onClick={() => {this.handleRating(3)}}/>
+              <img className='rating-icon-editable' src={ratingImage[3]} alt='star' onClick={() => {this.handleRating(4)}}/>
+              <img className='rating-icon-editable' src={ratingImage[4]} alt='star' onClick={() => {this.handleRating(5)}}/>
+            </div>
+          </div>
+          <div className='submit-button-container'>
+            <input className='submit-button' type='submit' value='SAVE REVIEW' />
+          </div>
         </form>
       </div>
     );
