@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
 import './Reviews.css';
+import { withAuth } from '../../context/authContext';
 
 class Reviews extends Component {
   state = {
@@ -71,16 +72,18 @@ class Reviews extends Component {
           <h3>{review.title}</h3>
           <div className='Reviews-rating-edit-delete-container'>
             {this.drawRating(review)}
-            <div>
-              <Link to={`/reviews/${review._id}/edit`}><i className="material-icons">edit</i></Link>
-              <button
-                onClick={(e) => {
-                  this.handleDelete(review._id);
-                }}
-              >
-                <i className="material-icons">delete</i>
-              </button>
-            </div>
+            {this.props.user.data._id === review.userId._id &&
+              <div>
+                <Link to={`/reviews/${review._id}/edit`}><i className="material-icons">edit</i></Link>
+                <button
+                  onClick={(e) => {
+                    this.handleDelete(review._id);
+                  }}
+                >
+                  <i className="material-icons">delete</i>
+                </button>
+              </div>
+            }
           </div>
           <h4>{review.userId.username}</h4>
           <p>{review.text}</p>
@@ -112,4 +115,4 @@ class Reviews extends Component {
   }
 }
 
-export default Reviews;
+export default withAuth(Reviews);

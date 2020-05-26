@@ -113,14 +113,14 @@ class User extends Component {
           <div className='submit-button-container'>
             <input className='submit-button' type='submit' value='SAVE ACCOUNT' />
           </div>
-          <div className='User-small-buttons'>
-            {
-              !showPassword && 
-              <button className='App-small-button' onClick={this.changePasswordVisibility}>CHANGE PASSWORD</button>
-            }
-            <button className='App-small-button' onClick={onLogout}>LOGOUT</button>
-          </div>
         </form>
+        <div className='User-small-buttons'>
+          {
+            !showPassword && 
+            <button className='App-small-button' onClick={this.changePasswordVisibility}>CHANGE PASSWORD</button>
+          }
+          <button className='App-small-button' onClick={onLogout}>LOGOUT</button>
+        </div>
       </div>
     );
   }

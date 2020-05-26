@@ -9,10 +9,10 @@ import LoginWithAuth from './views/auth/Login';
 import SignupWithAuth from './views/auth/Signup';
 import AddTerraceWithAuth from './views/terraces/AddTerrace';
 import Terraces from './views/terraces/Terraces';
-import TerraceDetail from './views/terraces/TerraceDetail';
+import TerraceDetailWithAuth from './views/terraces/TerraceDetail';
 import EditTerrace from './views/terraces/EditTerrace';
 import AddReviewWithAuth from './views/reviews/AddReview';
-import Reviews from './views/reviews/Reviews';
+import ReviewsWithAuth from './views/reviews/Reviews';
 import EditReview from './views/reviews/EditReview';
 import User from './views/auth/User';
 
@@ -30,10 +30,10 @@ class App extends Component {
               <PrivateRoute exact path={'/protected'} component={Protected} />
               <PrivateRoute exact path={'/terraces/add'} component={AddTerraceWithAuth} />
               <PrivateRoute exact path={'/terraces'} component={Terraces} />
-              <PrivateRoute exact path={'/terraces/:id'} component={TerraceDetail} />
+              <PrivateRoute exact path={'/terraces/:id'} component={TerraceDetailWithAuth} />
               <PrivateRoute exact path={'/terraces/:id/edit'} component={EditTerrace} />
               <PrivateRoute exact path={'/terraces/:id/reviews/add'} component={AddReviewWithAuth} />
-              <PrivateRoute exact path={'/terraces/:id/reviews'} component={Reviews} />
+              <PrivateRoute exact path={'/terraces/:id/reviews'} component={ReviewsWithAuth} />
               <PrivateRoute exact path={'/reviews/:id/edit'} component={EditReview} />
               <PrivateRoute exact path={'/user/:id'} component={User} />
             </Switch>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
 import './TerraceDetail.css';
+import { withAuth } from '../../context/authContext';
 
 class TerraceDetail extends Component {
   state = {
@@ -55,9 +56,10 @@ class TerraceDetail extends Component {
       type,
       liveMusic,
       petFriendly,
-      menuPicture
+      menuPicture,
+      userId
     } = this.state.terrace;
-    
+
     return (
       <div className='TerraceDetail'>
         <img className='App-big-img' src={picture} alt={name} />
@@ -151,15 +153,17 @@ class TerraceDetail extends Component {
           </div>
         </div>
         <img className='App-big-img' src={menuPicture} alt='Menu' />
-        <div className='App-edit-delete-buttons-container'>
-          <Link to={`/terraces/${_id}/edit`}><i className="material-icons App-edit-delete-button">edit</i></Link>
-          <i className="material-icons App-edit-delete-button" onClick={(e) => {
-              this.handleDelete(_id);
-            }}>delete</i>
-        </div>
+        {this.props.user.data._id === userId &&
+          <div className='App-edit-delete-buttons-container'>
+            <Link to={`/terraces/${_id}/edit`}><i className="material-icons App-edit-delete-button">edit</i></Link>
+            <i className="material-icons App-edit-delete-button" onClick={(e) => {
+                this.handleDelete(_id);
+              }}>delete</i>
+          </div>
+        }
       </div>
     );
   }
 }
 
-export default TerraceDetail;
+export default withAuth(TerraceDetail);
