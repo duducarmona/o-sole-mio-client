@@ -48,6 +48,10 @@ class ApiClient {
     return this.apiClient.put(`/terraces/${id}`, body);
   }
 
+  updateTerraceState(id, body) {
+    return this.apiClient.put(`/terraces/${id}/updates`, body);
+  }
+
   createReview(body) {
     return this.apiClient.post('/reviews', body);
   }

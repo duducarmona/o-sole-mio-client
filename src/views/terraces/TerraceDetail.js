@@ -57,7 +57,9 @@ class TerraceDetail extends Component {
       liveMusic,
       petFriendly,
       menuPicture,
-      userId
+      userId,
+      freeTables,
+      updates
     } = this.state.terrace;
 
     return (
@@ -66,14 +68,30 @@ class TerraceDetail extends Component {
         <div className='App-with-padding'>
           <h2>{name}</h2>
           <div className='TerraceDetail-rating'>
-            <div>
-              <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
-              <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
-              <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
-              <img className='TerraceDetail-rating-icon' src='/images/sun-icon-grey.png' alt='sun' />
-              <img className='TerraceDetail-rating-icon' src='/images/sun-icon-grey.png' alt='sun' />
-              <p className='TerraceDetail-rating-p'>345 participations</p>
-            </div>
+            <Link to={
+              {
+                pathname: `/terraces/${_id}/updates`,
+                state: {
+                  terraceId: _id,
+                  terraceUpdates: updates
+                }
+              }
+            }>
+              <div className='TerraceDetail-updates'>
+                <div>
+                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
+                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
+                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
+                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon-grey.png' alt='sun' />
+                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon-grey.png' alt='sun' />
+                  <p className='TerraceDetail-rating-p'>{updates} updates</p>
+                </div>
+                <div className='TerraceDetail-free-table-container'>
+                  <img className='TerraceDetail-img-free-table' src='/images/free-table.png' alt='free table'/>
+                  <p className='TerraceDetail-p-free-table'>Free tables: {freeTables}</p>
+                </div>
+              </div>
+            </Link>
             <Link to={
               {
                 pathname: `/terraces/${_id}/reviews`,
@@ -108,7 +126,7 @@ class TerraceDetail extends Component {
           </div>
           <div className='TerraceDetail-line'>
             <i className="fa fa-beer" aria-hidden="true"></i>
-            <p>Beer price: {beerPrice} {beerPrice && '€'}</p>
+            <p>Beer price: {beerPrice} {beerPrice !== 0 && '€'}</p>
           </div>
           <div className='TerraceDetail-line'>
             <i className="material-icons">fastfood</i>

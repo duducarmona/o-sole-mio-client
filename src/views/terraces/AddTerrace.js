@@ -78,9 +78,11 @@ class AddTerrace extends Component {
       liveMusic,
       petFriendly,
       menuPicture,
-      sunAmount
+      sunAmount,
+      freeTables,
+      updates
     } = this.state;
-
+    
     apiClient
       .createTerrace({ 
         name, 
@@ -98,6 +100,8 @@ class AddTerrace extends Component {
         menuPicture,
         sunAmount,
         sunRegisterTime: new Date(),
+        freeTables,
+        updates
       })
       .then((res) => {
         history.push('/terraces');
