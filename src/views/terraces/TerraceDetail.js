@@ -6,11 +6,14 @@ import { withAuth } from '../../context/authContext';
 
 class TerraceDetail extends Component {
   state = {
-    terrace: {}
+    terrace: {},
+    rating: 0,
+    reviewsNumber: 0
   }
 
   componentDidMount() {
     this.getTerraceDetail();
+    this.calculateStarRating();
   }
 
   getTerraceDetail = () => {
@@ -41,6 +44,74 @@ class TerraceDetail extends Component {
         console.log(error);
       });
   };
+
+  drawRating = (sunStar) => {
+    const ratingImage = [];
+    const greySun = '/images/sun-icon-grey.png';
+    const yellowSun = '/images/sun-icon.png';
+    const greyStar = '/images/star-icon-grey.png';
+    const blueStar = '/images/star-icon-blue.png';
+    const lengthRating = 5;
+    let amount;
+    let emptyIcon;
+    let fullIcon;
+
+    if (sunStar === 'sun') {
+      amount = this.state.terrace.sunAmount;
+      emptyIcon = greySun;
+      fullIcon = yellowSun;
+    }
+    else {
+      amount = this.state.rating;
+      emptyIcon = greyStar;
+      fullIcon = blueStar;
+    }
+
+    for (let index = 0; index < amount; index++) {
+      ratingImage.push(fullIcon);
+    }
+
+    for (let index = amount; index < lengthRating; index++) {
+      ratingImage.push(emptyIcon);
+    }
+
+    return (
+      <div className='Terraces-sun-rating'>
+        <img className='TerraceDetail-rating-icon' src={ratingImage[0]} alt={sunStar} />
+        <img className='TerraceDetail-rating-icon' src={ratingImage[1]} alt={sunStar} />
+        <img className='TerraceDetail-rating-icon' src={ratingImage[2]} alt={sunStar} />
+        <img className='TerraceDetail-rating-icon' src={ratingImage[3]} alt={sunStar} />
+        <img className='TerraceDetail-rating-icon' src={ratingImage[4]} alt={sunStar} />
+      </div>
+    );
+  };
+
+  calculateStarRating = () => {
+    const { params } = this.props.match;
+    let average = 0;
+
+    apiClient
+      .getReviewsByTerrace(params.id)
+      .then(({ data }) => {
+        let sumRating = 0;
+        
+        data.forEach(review => {
+          sumRating += review.rating;
+        });
+        
+        if (data.length > 0) {
+          average = sumRating / data.length;
+        }
+
+        this.setState({
+          rating: average,
+          reviewsNumber: data.length
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   render() {
     const {
@@ -79,11 +150,7 @@ class TerraceDetail extends Component {
             }>
               <div className='TerraceDetail-updates'>
                 <div>
-                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
-                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
-                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon.png' alt='sun' />
-                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon-grey.png' alt='sun' />
-                  <img className='TerraceDetail-rating-icon' src='/images/sun-icon-grey.png' alt='sun' />
+                  {this.drawRating('sun')}
                   <p className='TerraceDetail-rating-p'>{updates} updates</p>
                 </div>
                 <div className='TerraceDetail-free-table-container'>
@@ -102,12 +169,8 @@ class TerraceDetail extends Component {
               }
             }>
               <div className='TerraceDetail-reviews'>
-                <img className='TerraceDetail-rating-icon' src='/images/star-icon-blue.png' alt='star' />
-                <img className='TerraceDetail-rating-icon' src='/images/star-icon-blue.png' alt='star' />
-                <img className='TerraceDetail-rating-icon' src='/images/star-icon-blue.png' alt='star' />
-                <img className='TerraceDetail-rating-icon' src='/images/star-icon-blue.png' alt='star' />
-                <img className='TerraceDetail-rating-icon' src='/images/star-icon-grey.png' alt='star' />
-                <p className='TerraceDetail-rating-p'>214 reviews</p>
+                {this.drawRating('star')}
+                <p className='TerraceDetail-rating-p'>{this.state.reviewsNumber} reviews</p>
               </div>
             </Link>
           </div>
