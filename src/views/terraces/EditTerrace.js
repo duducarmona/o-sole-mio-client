@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import apiClient from '../../services/apiClient';
 import './EditTerrace.css';
+import { Link } from 'react-router-dom';
 
 class EditTerrace extends Component {
   state = {
     name: '',
     description: '',
     address: '',
+    lng: 0,
+    lat: 0,
     phone: '',
     email: '',
     picture: '',
@@ -36,6 +39,27 @@ class EditTerrace extends Component {
     const { sunImage } = this.state;
     const newSunImage = [];
     let responseFromApi = undefined;
+    let newAddress = undefined;
+    let newLng = undefined;
+    let newLat = undefined;
+
+    // It the map loaded an address, use it.
+    try {
+      newAddress = this.props.history.location.state.address;
+    } catch (error) {
+    }
+
+    // It the map loaded a longitude, use it.
+    try {
+      newLng = this.props.history.location.state.lng;
+    } catch (error) {
+    }
+
+    // It the map loaded a longitude, use it.
+    try {
+      newLat = this.props.history.location.state.lat;
+    } catch (error) {
+    }
 
     try {
       responseFromApi = await apiClient.getTerraceDetail(params.id);   
@@ -49,6 +73,8 @@ class EditTerrace extends Component {
       name, 
       description,
       address,
+      lng,
+      lat,
       phone,
       email,
       picture,
@@ -65,7 +91,9 @@ class EditTerrace extends Component {
     this.setState({
       name,
       description,
-      address,
+      address: (newAddress ? newAddress : address),
+      lng: (newLng ? newLng : lng),
+      lat: (newLat ? newLat : lat),
       phone,
       email,
       picture,
@@ -151,6 +179,8 @@ class EditTerrace extends Component {
       name, 
       description,
       address,
+      lng,
+      lat,
       phone,
       email,
       picture,
@@ -168,6 +198,8 @@ class EditTerrace extends Component {
         name, 
         description,
         address,
+        lng,
+        lat,
         phone,
         email,
         picture,
@@ -193,6 +225,8 @@ class EditTerrace extends Component {
       name,
       description,
       address,
+      lng,
+      lat,
       phone,
       email,
       picture,
@@ -226,13 +260,25 @@ class EditTerrace extends Component {
             value={description}
           />
           <label htmlFor='address'>Address*</label>
-          <input
-            type='text'
-            name='address'
-            id='address'
-            onChange={this.handleChange}
-            value={address}
-          />
+          <div className='EditTerrace-address-container'>
+            <input
+              type='text'
+              name='address'
+              id='address'
+              readOnly='readonly'
+              value={address}
+            />
+            <Link className='EditTerrace-edit-address-link' to={
+              {
+                pathname: '/mapEditTerrace',
+                state: {
+                  lng: lng,
+                  lat: lat,
+                  terraceId: this.props.match.params.id
+                }
+              }
+            }><i className="material-icons">edit</i></Link>
+          </div>
           <label htmlFor='phone'>Phone</label>
           <input
             type='text'

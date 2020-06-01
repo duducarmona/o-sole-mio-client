@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { withAuth } from '../../context/authContext';
 import './AddTerrace.css';
+import { Link } from 'react-router-dom';
 
 class AddTerrace extends Component {
   state = {
@@ -11,7 +12,9 @@ class AddTerrace extends Component {
     petFriendly: false,
     name: '',
     description: '',
-    address: '',
+    address: this.props.history.location.state.address,
+    lng: this.props.history.location.state.lng,
+    lat: this.props.history.location.state.lat,
     phone: '',
     email: '',
     picture: '',
@@ -69,6 +72,8 @@ class AddTerrace extends Component {
       userId, 
       description,
       address,
+      lng,
+      lat,
       phone,
       email,
       picture,
@@ -89,6 +94,8 @@ class AddTerrace extends Component {
         userId, 
         description,
         address,
+        lng,
+        lat,
         phone,
         email,
         picture,
@@ -146,13 +153,16 @@ class AddTerrace extends Component {
             value={description}
           />
           <label htmlFor='address'>Address*</label>
-          <input
-            type='text'
-            name='address'
-            id='address'
-            onChange={this.handleChange}
-            value={address}
-          />
+          <div className='AddTerrace-address-container'>
+            <input
+              type='text'
+              name='address'
+              id='address'
+              value={address}
+              readOnly='readonly'
+            />
+            <Link className='AddTerrace-edit-address-link' to='/mapAddTerrace'><i className="material-icons">edit</i></Link>
+          </div>
           <label htmlFor='phone'>Phone</label>
           <input
             type='text'

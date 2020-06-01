@@ -22,13 +22,18 @@ class ApiClient {
 
   whoami() {
     return this.apiClient.get('/whoami');
+    // this.apiClient.get('/whoami')
+    // .then((data) => {
+    //   return new Promise (data);
+    // })
+    // .catch();
   }
 
   getProtected() {
     return this.apiClient.get('/protected');
   }
 
-  createTerrace(body) { 
+  createTerrace(body) {
     return this.apiClient.post('/terraces', body);
   }
 

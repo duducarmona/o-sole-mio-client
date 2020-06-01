@@ -184,3 +184,12 @@ input[type="radio"].AddTerrace-EditTerrace-switch-toggle {
   background-color: #009A9A;
   border-radius: 5px;
 }
+
+.map-marker {
+  background-image: url('/images/location-terrace.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}

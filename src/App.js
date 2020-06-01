@@ -17,6 +17,8 @@ import EditReview from './views/reviews/EditReview';
 import User from './views/auth/User';
 import UpdateTerraceState from './views/terraces/UpdateTerraceState';
 import MapTerraces from './views/terraces/MapTerraces';
+import MapAddTerrace from './views/terraces/MapAddTerrace';
+import MapEditTerrace from './views/terraces/MapEditTerrace';
 
 import AuthProvider from './context/authContext';
 
@@ -40,6 +42,8 @@ class App extends Component {
               <PrivateRoute exact path={'/user/:id'} component={User} />
               <PrivateRoute exact path={'/terraces/:id/updates'} component={UpdateTerraceState} />
               <PrivateRoute exact path={'/mapTerraces'} component={MapTerraces} />
+              <PrivateRoute exact path={'/mapAddTerrace'} component={MapAddTerrace} />
+              <PrivateRoute exact path={'/mapEditTerrace'} component={MapEditTerrace} />
             </Switch>
           </div>
         </div>
