@@ -43,6 +43,35 @@ class MapTerraces extends Component {
     );
   }
 
+  buildHTMLPopup = (_id, title, sunAmount) => {
+    const ratingImage = [];
+    const greySun = '/images/sun-icon-grey.png';
+    const yellowSun = '/images/sun-icon.png';
+    const lengthRating = 5;
+
+    for (let index = 0; index < sunAmount; index++) {
+      ratingImage.push(yellowSun);
+    }
+
+    for (let index = sunAmount; index < lengthRating; index++) {
+      ratingImage.push(greySun);
+    }
+    const html = `
+      <a class='MapTerrace-a' href='/terraces/${_id}'>
+        <h3 class='MapTerrace-h3'>${title}</h3>
+        <div class='Terraces-sun-rating'>
+          <img class='TerraceDetail-rating-icon' src=${ratingImage[0]} alt='sun' />
+          <img class='TerraceDetail-rating-icon' src=${ratingImage[1]} alt='sun' />
+          <img class='TerraceDetail-rating-icon' src=${ratingImage[2]} alt='sun' />
+          <img class='TerraceDetail-rating-icon' src=${ratingImage[3]} alt='sun' />
+          <img class='TerraceDetail-rating-icon' src=${ratingImage[4]} alt='sun' />
+        </div>
+      </a>
+    `;
+
+    return html;
+  };
+
   loadTerraces = async (map) => {
     let terraces = undefined;
     let newFeature = undefined;
@@ -66,7 +95,8 @@ class MapTerraces extends Component {
         },
         properties: {
           title: terrace.name,
-          description: terrace.description
+          _id: terrace._id,
+          sunAmount: terrace.sunAmount
         }
       }
 
@@ -74,7 +104,7 @@ class MapTerraces extends Component {
     });
 
     // add markers to map
-    geojson.features.forEach(function(marker) {
+    geojson.features.forEach((marker) => {
       if (marker.geometry.coordinates[0] && marker.geometry.coordinates[0]) {
         // create a HTML element for each feature
         const el = document.createElement('div');
@@ -82,7 +112,7 @@ class MapTerraces extends Component {
 
         const popup = new mapboxgl.Popup({ offset: [0, -15] })
             .setLngLat(marker.geometry.coordinates)
-            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')
+            .setHTML(this.buildHTMLPopup(marker.properties._id, marker.properties.title, marker.properties.sunAmount))
             .addTo(map);
 
         new mapboxgl.Marker(el)
