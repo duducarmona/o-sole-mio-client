@@ -6,7 +6,7 @@ import './Navbar.css';
 class Navbar extends Component {
   render() {
     const { path } = this.props.rest;
-    
+
     return (
       <nav className='Navbar'>
         <ul>

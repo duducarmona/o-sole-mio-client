@@ -170,7 +170,7 @@ class EditReview extends Component {
           <textarea
             name='text'
             id='text'
-            rows='8'
+            rows='6'
             onChange={this.handleChange}
             value={text}
             ref={(input) => { this.textInput = input; }}

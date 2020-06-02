@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import NavbarWithAuth from '../views/navbar/Navbar';
 import { withAuth } from "../context/authContext";
 import './PrivateRoute.css';
+import Header from '../views/header/Header';
 
 class PrivateRoute extends Component {
   render() {
@@ -15,6 +16,7 @@ class PrivateRoute extends Component {
           render={(props) =>
             isLoggedIn ? (
               <div>
+                <Header {...props}/>
                 <Comp {...props} />
                 <NavbarWithAuth rest={rest}/>
               </div>
