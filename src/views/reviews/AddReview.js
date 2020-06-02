@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { withAuth } from '../../context/authContext';
 import './AddReview.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddReview extends Component {
   state = {
@@ -62,25 +64,37 @@ class AddReview extends Component {
       rating
     } = this.state;
 
-    apiClient
-      .createReview({
-        userId,
-        terraceId,
-        title,
-        text,
-        rating
-      })
-      .then((res) => {
-        history.push({
-          pathname: `/terraces/${res.data.terraceId}/reviews`,
-          state: {
-            terraceId: res.data.terraceId
-          }
+    if (!title || title.trim() === '') {
+      toast.info('Please, insert the title');
+      this.titleInput.value = '';
+      this.titleInput.focus();
+    }
+    else if (!text || text.trim() === '') {
+      toast.info('Please, insert the review');
+      this.textInput.value = '';
+      this.textInput.focus();
+    }
+    else {
+      apiClient
+        .createReview({
+          userId,
+          terraceId,
+          title,
+          text,
+          rating
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => {
+          history.push({
+            pathname: `/terraces/${res.data.terraceId}/reviews`,
+            state: {
+              terraceId: res.data.terraceId
+            }
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   render() {
@@ -92,6 +106,10 @@ class AddReview extends Component {
 
     return (
     <div className='AddReview  App-with-padding'>
+      <ToastContainer className='ToastContainer'
+        position='bottom-center'
+        type='info'>
+      </ToastContainer>
       <h1 className='view-h1'>Add review</h1>
       <form onSubmit={this.handleSubmit}>
         <label htmlFor='title'>Title*</label>
@@ -101,6 +119,7 @@ class AddReview extends Component {
           id='title'
           onChange={this.handleChange}
           value={title}
+          ref={(input) => { this.titleInput = input; }}
         />
         <label htmlFor='text'>Review*</label>
         <textarea
@@ -109,6 +128,7 @@ class AddReview extends Component {
           rows='8'
           onChange={this.handleChange}
           value={text}
+          ref={(input) => { this.textInput = input; }}
         />
         <div className='rating-icon-editable-container'>
           <div>

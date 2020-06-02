@@ -5,7 +5,7 @@ import './Terraces.css';
 
 class Terraces extends Component {
   state = {
-    terraces: [],
+    terraces: []
   };
 
   loadTerraces = () => {

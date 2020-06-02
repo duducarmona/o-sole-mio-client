@@ -3,6 +3,8 @@ import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
 import './TerraceDetail.css';
 import { withAuth } from '../../context/authContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class TerraceDetail extends Component {
   state = {
@@ -31,9 +33,9 @@ class TerraceDetail extends Component {
       });
   };
 
-  handleDelete = (id) => {
+  delete = () => {
     apiClient
-      .deleteTerrace(id)
+      .deleteTerrace(this.props.match.params.id)
       .then(() => {
         const { history } = this.props;
 
@@ -43,6 +45,15 @@ class TerraceDetail extends Component {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  handleDelete = (id) => {
+    toast.error(
+      <div>
+        <span>Delete terrace?</span>
+        <button className='ToastContainer Toastify-delete-button' onClick={this.delete}>Yes</button>
+      </div>
+    );
   };
 
   drawRating = (sunStar) => {
@@ -135,6 +146,11 @@ class TerraceDetail extends Component {
 
     return (
       <div className='TerraceDetail'>
+        <ToastContainer className='ToastContainer'
+          position='bottom-center'
+          type='info'
+          autoClose={false}>
+        </ToastContainer>
         <img className='App-big-img' src={picture} alt={name} />
         <div className='App-with-padding'>
           <h2>{name}</h2>
@@ -189,7 +205,7 @@ class TerraceDetail extends Component {
           </div>
           <div className='TerraceDetail-line'>
             <i className="fa fa-beer" aria-hidden="true"></i>
-            <p>Beer price: {beerPrice} {beerPrice !== 0 && '€'}</p>
+            <p>Beer price: {beerPrice} {(beerPrice !== 0 && beerPrice) && '€'}</p>
           </div>
           <div className='TerraceDetail-line'>
             <i className="material-icons">fastfood</i>

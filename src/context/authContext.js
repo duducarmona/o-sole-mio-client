@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
 import apiClient from "../services/apiClient";
+import { toast } from 'react-toastify';
 
 export const AuthContext = React.createContext();
 
@@ -64,6 +64,8 @@ class AuthProvider extends Component {
         });
       })
       .catch((error) => {
+        toast.error('Username or Password incorrect');
+
         this.setState({
           isLoggedIn: false,
           user: null,
@@ -82,6 +84,8 @@ class AuthProvider extends Component {
         });
       })
       .catch((error) => {
+        toast.error('Username already exist');
+        
         this.setState({
           isLoggedIn: false,
           user: null,

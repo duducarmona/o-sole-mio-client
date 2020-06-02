@@ -3,6 +3,8 @@ import apiClient from '../../services/apiClient';
 import { withAuth } from '../../context/authContext';
 import './AddTerrace.css';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddTerrace extends Component {
   state = {
@@ -32,9 +34,42 @@ class AddTerrace extends Component {
     sunRegisterTime: ''
   };
 
+  correctBeerPrice = (value) => {
+    // Delete spaces in the number.
+    value = value.trim();
+
+    // Delete the last character if is not a number.
+    if (isNaN(value)) {
+      value = value.slice(0, -1);
+    }
+
+    // If there is more than 1 digit and start with 0, delete the first 0.
+    if (value.length > 1 && value.charAt(0) === '0' && value.charAt(1) !== '.') {
+      value = value.slice(1);
+    }
+
+    // Allow only 2 decimals.
+    const pointPos = value.indexOf('.');
+
+    if (pointPos !== -1) {
+      if (value.length - pointPos > 3) {
+        value = value.slice(0, -1);
+      }
+    }
+
+    return value;
+  };
+
   handleChange = (e) => {
+    const name = e.target.name;
+    let value = e.target.value;
+
+    if (name === 'beerPrice') {
+      value = this.correctBeerPrice(value);
+    }
+
     this.setState({
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
@@ -88,34 +123,41 @@ class AddTerrace extends Component {
       updates
     } = this.state;
     
-    apiClient
-      .createTerrace({ 
-        name, 
-        userId, 
-        description,
-        address,
-        lng,
-        lat,
-        phone,
-        email,
-        picture,
-        beerPrice,
-        bestTapa,
-        type,
-        liveMusic,
-        petFriendly,
-        menuPicture,
-        sunAmount,
-        sunRegisterTime: new Date(),
-        freeTables,
-        updates
-      })
-      .then((res) => {
-        history.push('/terraces');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!name || name.trim() === '') {
+      toast.info('Please, insert the name');
+      this.nameInput.value = '';
+      this.nameInput.focus();
+    }
+    else {
+      apiClient
+        .createTerrace({ 
+          name, 
+          userId, 
+          description,
+          address,
+          lng,
+          lat,
+          phone,
+          email,
+          picture,
+          beerPrice,
+          bestTapa,
+          type,
+          liveMusic,
+          petFriendly,
+          menuPicture,
+          sunAmount,
+          sunRegisterTime: new Date(),
+          freeTables,
+          updates
+        })
+        .then((res) => {
+          history.push('/terraces');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   render() {
@@ -134,6 +176,10 @@ class AddTerrace extends Component {
 
     return (
       <div className='AddTerrace App-with-padding'>
+        <ToastContainer className='ToastContainer'
+          position='bottom-center'
+          type='info'>
+        </ToastContainer>
         <h1 className='view-h1'>Add terrace</h1>
         <form className='AddTerrace-EditTerrace-form' onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name*</label>
@@ -143,6 +189,7 @@ class AddTerrace extends Component {
             id='name'
             onChange={this.handleChange}
             value={name}
+            ref={(input) => { this.nameInput = input; }}
           />
           <label htmlFor='description'>Description</label>
           <textarea
@@ -152,7 +199,7 @@ class AddTerrace extends Component {
             onChange={this.handleChange}
             value={description}
           />
-          <label htmlFor='address'>Address*</label>
+          <label htmlFor='address'>Address</label>
           <div className='AddTerrace-address-container'>
             <input
               type='text'

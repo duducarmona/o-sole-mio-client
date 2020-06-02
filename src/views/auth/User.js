@@ -3,6 +3,8 @@ import { withAuth } from '../../context/authContext';
 import apiClient from '../../services/apiClient';
 import './User.css';
 import '../../App.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class User extends Component {
   state = {
@@ -19,28 +21,23 @@ class User extends Component {
       // currentPassword
     } = this.state;
 
-    // apiClient
-    //   .checkCorrectPassword(currentPassword, { hashedPassword: this.props.user.data.hashedPassword })
-    //   .then()
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    apiClient
-      .editUser(this.props.match.params.id, {
-        username
-      })
-      .then((res) => {
-        // history.push({
-        //   pathname: `/terraces/${res.data.terraceId}/reviews`,
-        //   state: {
-        //     terraceId: res.data.terraceId
-        //   }
-        // })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!username || username.trim() === '') {
+      toast.error(`Username can't be empty`);
+      this.usernameInput.focus();
+    }
+    else {
+      apiClient
+        .editUser(this.props.match.params.id, {
+          username
+        })
+        .then((res) => {
+          toast.success('User modified');
+        })
+        .catch((error) => {
+          toast.error('Username already exist');
+          this.usernameInput.focus();
+        });
+    }
   }
 
   handleChange = (e) => {
@@ -66,6 +63,10 @@ class User extends Component {
 
     return (
       <div className='User App-with-padding'>
+        <ToastContainer className='ToastContainer'
+          position='bottom-center'
+          type='info'>
+        </ToastContainer>
         <h1 className='view-h1'>My account</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='username'>Username</label>
@@ -75,6 +76,7 @@ class User extends Component {
             id='username'
             onChange={this.handleChange}
             value={username}
+            ref={(input) => { this.usernameInput = input; }}
           />
           <div>
             {

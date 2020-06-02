@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import apiClient from '../../services/apiClient';
 import './EditReview.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class EditReview extends Component {
   state = {
@@ -109,23 +111,35 @@ class EditReview extends Component {
       rating
     } = this.state;
 
-    apiClient
-      .editReview(id, { 
-        title,
-        text,
-        rating 
-      })
-      .then((res) => {
-        history.push({
-          pathname: `/terraces/${this.state.terraceId}/reviews`,
-          state: {
-            terraceId: this.state.terraceId
-          }
+    if (!title || title.trim() === '') {
+      toast.info('Please, insert the title');
+      this.titleInput.value = '';
+      this.titleInput.focus();
+    }
+    else if (!text || text.trim() === '') {
+      toast.info('Please, insert the review');
+      this.textInput.value = '';
+      this.textInput.focus();
+    }
+    else {
+      apiClient
+        .editReview(id, { 
+          title,
+          text,
+          rating 
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => {
+          history.push({
+            pathname: `/terraces/${this.state.terraceId}/reviews`,
+            state: {
+              terraceId: this.state.terraceId
+            }
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   render() {
@@ -137,6 +151,10 @@ class EditReview extends Component {
 
     return (
       <div className='EditReview App-with-padding'>
+        <ToastContainer className='ToastContainer'
+          position='bottom-center'
+          type='info'>
+        </ToastContainer>
         <h1 className='view-h1'>Edit review</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='title'>Title*</label>
@@ -146,6 +164,7 @@ class EditReview extends Component {
             id='title'
             onChange={this.handleChange}
             value={title}
+            ref={(input) => { this.titleInput = input; }}
           />
           <label htmlFor='text'>Review*</label>
           <textarea
@@ -154,6 +173,7 @@ class EditReview extends Component {
             rows='8'
             onChange={this.handleChange}
             value={text}
+            ref={(input) => { this.textInput = input; }}
           />
           <div className='rating-icon-editable-container'>
             <div>

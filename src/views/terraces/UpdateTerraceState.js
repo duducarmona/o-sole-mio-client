@@ -43,8 +43,15 @@ class UpdateTerraceState extends Component {
   };
 
   handleChange = (e) => {
+    const name = e.target.name;
+    let value = e.target.value;
+
+    if (name === 'freeTables') {
+      value = this.justNumbers(value);
+    }
+
     this.setState({
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
@@ -60,7 +67,7 @@ class UpdateTerraceState extends Component {
     } = this.state;
 
     apiClient
-      .  updateTerraceState(id, { 
+      .updateTerraceState(id, { 
         sunAmount,
         freeTables,
         updates,
@@ -72,6 +79,28 @@ class UpdateTerraceState extends Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  justNumbers = (value) => {
+    // Delete spaces in the number.
+    value = value.trim();
+
+    // Delete the last character if is not a number.
+    if (isNaN(value)) {
+      value = value.slice(0, -1);
+    }
+
+    // If the value is an empty string, set a 0.
+    if (value === '') {
+      value = 0;
+    }
+
+    // If there is more than 1 digit and start with 0, delete the first 0.
+    if (value.length > 1 && value.charAt(0) === '0') {
+      value = value.slice(1);
+    }
+
+    return value;
   }
 
   render() {
@@ -101,6 +130,7 @@ class UpdateTerraceState extends Component {
               type='text'
               name='freeTables'
               id='freeTables'
+              min='0'
               onChange={this.handleChange}
               value={freeTables}
             />

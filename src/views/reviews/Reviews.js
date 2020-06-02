@@ -3,6 +3,8 @@ import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
 import './Reviews.css';
 import { withAuth } from '../../context/authContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Reviews extends Component {
   state = {
@@ -51,7 +53,7 @@ class Reviews extends Component {
     this.loadReviews();
   }
 
-  handleDelete = (id) => {
+  delete = (id) => {
     apiClient
       .deleteReview(id)
       .then(() => {
@@ -61,6 +63,15 @@ class Reviews extends Component {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  handleDelete = (id) => {
+    toast.error(
+      <div>
+        <span>Delete review?</span>
+        <button className='ToastContainer Toastify-delete-button' onClick={() => this.delete(id)}>Yes</button>
+      </div>
+    );
   };
 
   renderReviews = () => {
@@ -75,7 +86,7 @@ class Reviews extends Component {
             {this.props.user.data._id === review.userId._id &&
               <div>
                 <Link to={`/reviews/${review._id}/edit`}><i className="material-icons">edit</i></Link>
-                <button
+                <button className='Reviews-delete-button'
                   onClick={(e) => {
                     this.handleDelete(review._id);
                   }}
@@ -95,8 +106,13 @@ class Reviews extends Component {
   render() {
     return (
       <div className='Reviews App-with-padding'>
+        <ToastContainer className='ToastContainer'
+          position='bottom-center'
+          type='info'
+          autoClose={false}>
+        </ToastContainer>
         <h1 className='view-h1'>Reviews</h1>
-        <h2>{this.props.location.state.terraceName}</h2>
+        <h2 className='Reviews-h2'>{this.props.location.state.terraceName}</h2>
         <div className='Reviews-add-container'> 
           <Link to={
             {
