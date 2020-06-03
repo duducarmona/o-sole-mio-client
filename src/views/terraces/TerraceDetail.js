@@ -151,7 +151,7 @@ class TerraceDetail extends Component {
           type='info'
           autoClose={false}>
         </ToastContainer>
-        <img className='App-big-img' src={picture} alt={name} />
+        <img className='App-big-img' src={picture} alt={name} onError={(e) => {e.target.src = '/images/default-terrace.jpg'}} />
         <div className='App-with-padding'>
           <h2>{name}</h2>
           <div className='TerraceDetail-rating'>
@@ -249,7 +249,7 @@ class TerraceDetail extends Component {
             <p>Menu:</p>
           </div>
         </div>
-        <img className='App-big-img' src={menuPicture} alt='Menu' />
+        <img className='App-big-img' src={menuPicture} alt='Menu' onError={(e) => {e.target.style.display='none'}} />
         {this.props.user.data._id === userId &&
           <div className='App-edit-delete-buttons-container'>
             <Link to={`/terraces/${_id}/edit`}><i className="material-icons App-edit-delete-button">edit</i></Link>

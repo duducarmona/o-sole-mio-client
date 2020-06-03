@@ -69,7 +69,7 @@ class Terraces extends Component {
       return (
         <li key={index}>
           <Link className='Terraces-Link' to={`/terraces/${terrace._id}`}>
-            <img className='App-big-img' src={terrace.picture} alt={terrace.name} />
+            <img className='App-big-img' src={terrace.picture} alt={terrace.name} onError={(e) => {e.target.src = '/images/default-terrace.jpg'}} />
             <div className='App-with-padding'>
               <div className='Terraces-info-under-img'>
                 <h2>{terrace.name}</h2>
