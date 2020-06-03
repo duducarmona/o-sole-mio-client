@@ -18,6 +18,10 @@ class TerraceDetail extends Component {
     this.calculateStarRating();
   }
 
+  componentDidUpdate() {
+    window.scrollTo(0,0);
+  };
+
   getTerraceDetail = () => {
     const { params } = this.props.match;
     
