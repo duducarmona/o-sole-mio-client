@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import './MapAddTerrace.css';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MapAddTerrace extends Component {
   state = {
@@ -47,28 +49,33 @@ class MapAddTerrace extends Component {
   };
 
   getAddressAndSubmit = async () => {
-    const {lng, lat} = this.state.marker._lngLat;
-    const { history } = this.props;
-    let response = undefined;
-
-    try {
-      response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`);
-    } catch (error) {
-      console.log(error);
-    }
-
-    this.setState({
-      address: response.data.features[0].place_name
-    });
-
-    history.push({
-      pathname: '/terraces/add',
-      state: {
-        address: this.state.address,
-        lng: this.state.lng,
-        lat: this.state.lat
+    if (this.state.marker) {
+      const {lng, lat} = this.state.marker._lngLat;
+      const { history } = this.props;
+      let response = undefined;
+  
+      try {
+        response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`);
+      } catch (error) {
+        console.log(error);
       }
-    });
+  
+      this.setState({
+        address: response.data.features[0].place_name
+      });
+  
+      history.push({
+        pathname: '/terraces/add',
+        state: {
+          address: this.state.address,
+          lng: this.state.lng,
+          lat: this.state.lat
+        }
+      });
+    }
+    else {
+      toast.info('Please, select a location');
+    }
   }
 
   clickEvent = (lng, lat, map) => {
@@ -97,6 +104,10 @@ class MapAddTerrace extends Component {
   render() {
     return (
     <div className='MapAddTerrace'>
+      <ToastContainer className='ToastContainer'
+        position='bottom-center'
+        type='info'>
+      </ToastContainer>
       <h2 className='MapAddTerrace-h2'>Select the terrace location</h2>
       <div ref={(el) => (this.mapContainer = el)} className='MapAddTerrace-mapContainer' />
       <div className='MapAddTerrace-button-container'>

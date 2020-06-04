@@ -1,13 +1,14 @@
 @import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css';
 
 .MapAddTerrace-h2 {
-  padding: 0 10px;
-  font-size: 1.8rem;
+  padding: 0 30px;
+  font-size: 1.5rem;
+  padding-top: 5px;
 }
 
 .MapAddTerrace-mapContainer {
   position: absolute;
-  top: 90px;
+  top: 100px;
   right: 0;
   left: 0;
   bottom: 0;
