@@ -21,6 +21,7 @@ import MapAddTerrace from './views/terraces/MapAddTerrace';
 import MapEditTerrace from './views/terraces/MapEditTerrace';
 
 import AuthProvider from './context/authContext';
+import NotFoundPage from './views/NofFoundPage/NotFoundPage';
 
 class App extends Component {
   render() {
@@ -44,6 +45,8 @@ class App extends Component {
               <PrivateRoute exact path={'/mapTerraces'} component={MapTerraces} />
               <PrivateRoute exact path={'/mapAddTerrace'} component={MapAddTerrace} />
               <PrivateRoute exact path={'/mapEditTerrace'} component={MapEditTerrace} />
+              <PrivateRoute exact path={'/notFoundPage'} component={NotFoundPage} />
+              <PrivateRoute path='*' component={NotFoundPage} />
             </Switch>
           </div>
         </div>

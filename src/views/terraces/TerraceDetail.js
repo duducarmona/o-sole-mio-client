@@ -34,6 +34,8 @@ class TerraceDetail extends Component {
       })
       .catch((err) => {
         console.log(err);
+        const { history } = this.props;
+        history.push('/notFoundPage');
       });
   };
 

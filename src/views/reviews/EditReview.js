@@ -46,26 +46,28 @@ class EditReview extends Component {
 
     try {
       responseFromApi = await apiClient.getReviewDetail(params.id);
+      
+      const review = responseFromApi.data;
+      const { 
+        title, 
+        text,
+        rating,
+        terraceId
+      } = review;
+      
+      this.setState({
+        title,
+        text,
+        rating,
+        terraceId
+      });
+  
+      this.fillRating();
     } catch (error) {
       console.log(error);
+      const { history } = this.props;
+      history.push('/notFoundPage');
     }
-
-    const review = responseFromApi.data;
-    const { 
-      title, 
-      text,
-      rating,
-      terraceId
-    } = review;
-    
-    this.setState({
-      title,
-      text,
-      rating,
-      terraceId
-    });
-
-    this.fillRating();
   };
 
   handleChange = (e) => {

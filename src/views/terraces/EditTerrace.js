@@ -65,61 +65,63 @@ class EditTerrace extends Component {
 
     try {
       responseFromApi = await apiClient.getTerraceDetail(params.id);   
+      
+      const terrace = responseFromApi.data;
+      
+      const {
+        name, 
+        description,
+        address,
+        lng,
+        lat,
+        phone,
+        email,
+        picture,
+        beerPrice,
+        bestTapa,
+        type,
+        liveMusic,
+        petFriendly,
+        menuPicture,
+        sunAmount,
+        sunRegisterTime
+      } = terrace;
+  
+      this.setState({
+        name,
+        description,
+        address: (newAddress ? newAddress : address),
+        lng: (newLng ? newLng : lng),
+        lat: (newLat ? newLat : lat),
+        phone,
+        email,
+        picture,
+        beerPrice: (beerPrice === null ? 0 : beerPrice),
+        bestTapa,
+        type,
+        liveMusic,
+        petFriendly,
+        menuPicture,
+        sunAmount,
+        sunRegisterTime
+      });
+  
+      for (let index = 0; index < sunAmount; index++) {
+        newSunImage.push('/images/sun-icon.png');
+      }
+  
+      for (let index = sunAmount; index < sunImage.length; index++) {
+        newSunImage.push('/images/sun-icon-grey.png');
+      }
+  
+      this.setState({
+        sunImage: newSunImage
+      });
     } catch (error) {
       console.log(error);
+      const { history } = this.props;
+      history.push('/notFoundPage');
     }
-
-    const terrace = responseFromApi.data;
-    
-    const {
-      name, 
-      description,
-      address,
-      lng,
-      lat,
-      phone,
-      email,
-      picture,
-      beerPrice,
-      bestTapa,
-      type,
-      liveMusic,
-      petFriendly,
-      menuPicture,
-      sunAmount,
-      sunRegisterTime
-    } = terrace;
-
-    this.setState({
-      name,
-      description,
-      address: (newAddress ? newAddress : address),
-      lng: (newLng ? newLng : lng),
-      lat: (newLat ? newLat : lat),
-      phone,
-      email,
-      picture,
-      beerPrice: (beerPrice === null ? 0 : beerPrice),
-      bestTapa,
-      type,
-      liveMusic,
-      petFriendly,
-      menuPicture,
-      sunAmount,
-      sunRegisterTime
-    });
-
-    for (let index = 0; index < sunAmount; index++) {
-      newSunImage.push('/images/sun-icon.png');
-    }
-
-    for (let index = sunAmount; index < sunImage.length; index++) {
-      newSunImage.push('/images/sun-icon-grey.png');
-    }
-
-    this.setState({
-      sunImage: newSunImage
-    });
   };
 
   handleChange = (e) => {
@@ -229,6 +231,7 @@ class EditTerrace extends Component {
         })
         .catch((error) => {
           console.log(error);
+          history.push('/notFoundPage');
         });
     }
   };

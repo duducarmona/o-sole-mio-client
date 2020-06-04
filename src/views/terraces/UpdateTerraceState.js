@@ -13,7 +13,18 @@ class UpdateTerraceState extends Component {
     ],
     sunAmount: 0,
     freeTables: 0,
-    updates: this.props.location.state.terraceUpdates
+    updates: 0
+  }
+
+  componentDidMount() {
+    try {
+      this.setState({
+        updates: this.props.location.state.terraceUpdates
+      });
+    } catch (error) {
+      const { history } = this.props;
+      history.push('/notFoundPage');
+    }
   }
 
   handleRating = (sunPos) => {
@@ -78,6 +89,7 @@ class UpdateTerraceState extends Component {
       })
       .catch((error) => {
         console.log(error);
+        history.push('/notFoundPage');
       });
   }
 

@@ -8,8 +8,24 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class Reviews extends Component {
   state = {
-    reviews: []
+    reviews: [],
+    terraceNameFromProps: undefined,
+    terraceIdFromProps: undefined
   };
+  
+  componentDidMount() {
+    try {
+      this.setState({
+        terraceNameFromProps: this.props.location.state.terraceName,
+        terraceIdFromProps: this.props.location.state.terraceId
+      });
+      
+      this.loadReviews();
+    } catch (error) {
+      const {history} = this.props;
+      history.push('/notFoundPage');
+    }
+  }
 
   loadReviews = () => {
     apiClient
@@ -21,6 +37,8 @@ class Reviews extends Component {
       })
       .catch((error) => {
         console.log(error);
+        const {history} = this.props;
+        history.push('/notFoundPage');
       });
   };
 
@@ -49,9 +67,6 @@ class Reviews extends Component {
     );
   };
 
-  componentDidMount() {
-    this.loadReviews();
-  }
 
   delete = (id) => {
     apiClient
@@ -104,6 +119,8 @@ class Reviews extends Component {
   };
 
   render() {
+    const { terraceNameFromProps, terraceIdFromProps } = this.state;
+
     return (
       <div className='Reviews App-with-padding'>
         <ToastContainer className='ToastContainer'
@@ -112,13 +129,13 @@ class Reviews extends Component {
           autoClose={false}>
         </ToastContainer>
         <h1 className='view-h1'>Reviews</h1>
-        <h2 className='Reviews-h2'>{this.props.location.state.terraceName}</h2>
+        <h2 className='Reviews-h2'>{terraceNameFromProps}</h2>
         <div className='Reviews-add-container'> 
           <Link to={
             {
-              pathname: `/terraces/${this.props.location.state.terraceId}/reviews/add`,
+              pathname: `/terraces/${terraceIdFromProps}/reviews/add`,
               state: {
-                terraceId: this.props.location.state.terraceId
+                terraceId: terraceIdFromProps
               }
             }
           }>

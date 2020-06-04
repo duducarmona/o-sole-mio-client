@@ -34,8 +34,14 @@ class User extends Component {
           toast.success('User modified');
         })
         .catch((error) => {
-          toast.error('Username already exist');
-          this.usernameInput.focus();
+          if (error.response.status === 422) {
+            toast.error('Username already exist');
+            this.usernameInput.focus();
+          }
+          else {
+            const { history } = this.props;
+            history.push('/notFoundPage');
+          }
         });
     }
   }
