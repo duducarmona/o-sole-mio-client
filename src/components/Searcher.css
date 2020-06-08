@@ -1,5 +1,5 @@
 .Searcher {
-  position: absolute;
+  position: fixed;
   top: 15px;
   left: 0;
   display: flex;
