@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import apiClient from '../../services/apiClient';
 import { Link } from 'react-router-dom';
 import './Terraces.css';
+import Searcher from '../../components/Searcher';
 
 class Terraces extends Component {
   state = {
-    terraces: []
+    terraces: [],
+    filterTerracesBy: ''
   };
 
   loadTerraces = () => {
@@ -63,9 +65,10 @@ class Terraces extends Component {
   };
 
   renderTerraces = () => {
-    const { terraces } = this.state;
+    const { terraces, filterTerracesBy } = this.state;
+    const filteredTerraces = terraces.filter(terrace => (terrace.name.toLowerCase()).indexOf(filterTerracesBy.toLowerCase()) >= 0);
 
-    return terraces.map((terrace, index) => {
+    return filteredTerraces.map((terrace, index) => {
       return (
         <li key={index}>
           <Link className='Terraces-Link' to={`/terraces/${terrace._id}`}>
@@ -89,9 +92,16 @@ class Terraces extends Component {
     });
   };
 
+  handleSearch = (textToFilter) => {
+    this.setState({
+      filterTerracesBy: textToFilter
+    });
+  };
+
   render() {
     return (
       <div className='Terraces'>
+        <Searcher setFilterTerraces={this.handleSearch}/>
         <ul>
           {this.renderTerraces()}
         </ul>

@@ -10,7 +10,10 @@ class Header extends Component {
           <div className='Header-back-container'>
             <i className='material-icons Header-back' onClick={this.props.history.goBack}>arrow_back</i>
           </div>
-          <h1 className='Header-h1'>O Sole Mio</h1>
+          {
+            (this.props.location.pathname !== '/terraces') &&
+            <h1 className='Header-h1'>O Sole Mio</h1>
+          }
         </div>
       </div>
     );
