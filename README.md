@@ -1,11 +1,5 @@
 # O Sole Mio (Client)
 
-## Instructions how to start
-
-create `.env` file like the example `.env.sample`
-
-start with `npm run start-dev`
-
 ## Description
 
 The project is an app to search for bars and restaurants with sunny terraces.
@@ -18,13 +12,11 @@ The motivation is caused by the difficulty of finding sunny terraces with free t
 
 **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault
 
-**500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
-
-**Homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
-
 **Sign up** - As a user I want to sign up on the webpage so that I can see all the terraces that I could visit
 
 **Login** - As a user I want to be able to log in on the webpage so that I can get back to my account
+
+**User account** - As a user I can go to a page to change my Username, Password and do Logout
 
 **Logout** - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
 
@@ -38,97 +30,33 @@ The motivation is caused by the difficulty of finding sunny terraces with free t
 
 **Terrace – edit** - As a user I want to edit a terrace
 
+**Terraces - map** - The user can see the terraces of the app in a map and can access to their details by clicking on them.
+
+**Add terrace from map** - The user can add terraces by location from the map.
+
+**Edit terrace location from map** - The user can edit the location of the terraces created by himself from the map.
+
+**Update terrace state** - The user can update the sun amount and the free tables of every terrace.
+
+**Reviews** - The user can see a list of the reviews of one terrace.
+
+**Add review** - The user can create reviews for the terraces he visit.
+
+**Edit review** - The user can edit the reviews created by himself.
+
+**Delete review** - The user can delete the reviews created by himself. 
+
 ## Backlog
 
 List of other features outside of the MVPs scope
 
-**User profile:** - see my profile - upload my profile picture - see other users profile - list of terraces created by the user - list of terraces that the user has visited
+**User profile:** - upload my profile picture - list of terraces created by the user - list of terraces that the user has visited
 
-**Geo Location:** - add geolocation to terraces when creating - show terraces in a map
+**Geo Location:** - display new terraces in the map that don't exist yet in the app
 
 **Check Sun:** Find a system to automatically check if it's sunny
 
 **Chat:** So that users can interact with each other
-
-## ROUTES:
-
-### Endpoints
-
-| Method | Path                   | Description                                                  | End View               |
-| :----: | ---------------------- | ------------------------------------------------------------ | ---------------------- |
-|  GET   | `/`                    | Login                                                        | `/login`               |
-|  GET   | `/signup`              | Signup                                                       | `/signup`              |
-|  GET   | `/logout`              | Logs out the user and redirects to login                     | `/`                    |
-|  POST  | `/login`               | Send user information, logged in and redirects to Terraces list | `/terraces`            |
-|  POST  | `/signup`              | Send user information, register and redirects to Terraces list | `/terraces`            |
-|  GET   | `/terraces`            | Terraces list page                                           | `/terraces`            |
-|  GET   | `/terraces/add`        | Show the form to add a terrace                               | `/terraces/add`        |
-|  POST  | `/terraces`            | Create a terrace and redirects to Terraces list              | `/terraces`            |
-|  POST  | `/terraces/:id/delete` | Delete a terrace and redirects to Terraces list              | `/terraces`            |
-|  GET   | `/terraces/:id/update` | Get the information to update a terrace                      | `/terraces/:id/update` |
-|  POST  | `/terraces/:id`        | Update a terrace and redirects to Terrace detail             | `/terraces/:id`        |
-|  GET   | `/terraces/:id`        | A terrace detail                                             | `/terraces/:id`        |
-
-### Auth
-
-| Method | Path      | description    | Body                     |
-| :----: | --------- | -------------- | ------------------------ |
-|  GET   | `/whoami` | who am i       |                          |
-|  POST  | `/signup` | signup a user  | `{ username, password }` |
-|  POST  | `/login`  | login a user   | `{ username, password }` |
-|  GET   | `/logout` | logout session |                          |
-
-## Models
-
-User model
-
-```javascript
-{
-	_id: ObjectId,
-  username: { type: String, required: true, unique: true },
-	password: { type: String, required: true }
-}
-```
-
-Terrace model
-
-```javascript
-{
-  _id: { type: ObjectId, required: true, unique: true },
-	userId: { type: ObjectId<User>, required: true },
-	name: { type: String, required: true },
-	description: String,
-	address: { type: String, required: true },
-	phone: String,
-  email: String,
-  picture: String,
-  freeTables: Number,
-  beerPrice: Number,
-  bestTapa: String,
-	type: { type: String, enum: ['bar', 'restaurant'] },
-  liveMusic: Boolean,
-  petFriendly: Boolean,
-  menuPicture: String,
-  sunAmount: { type: String, enum: ['totallySunny', 'partlySunny', 'notSunny'] },
-  sunRegisterTime: Date,
-  //starsNumber: Number
-}
-```
-
-Review model
-
-```javascript
-{
-  _id: { type: ObjectId, required: true, unique: true },
-  userId: { type: ObjectId<User>, required: true },
-  terraceId: { type: ObjectId<Terrace>, required: true },
-  title: { type: String, required: true },
-  text: { type: String, required: true },
-  rating: Number
-}
-```
-
-
 
 ## Links
 
@@ -140,8 +68,10 @@ https://trello.com/b/LN9YSuKF/o-sole-mio
 
 https://github.com/duducarmona/o-sole-mio-client
 
-[Deploy Link](http://heroku.com/)
+### Deploy link
+
+https://o-sole-mio-ddfb4.web.app/
 
 ### Slides
 
-[Slides Link](http://slides.com/)
+https://docs.google.com/presentation/d/1d4zLemXXlRcB1OLWSc2hGwiKB9LX2ILUdVSAktghYVA/edit?usp=sharing
